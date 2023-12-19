@@ -1,5 +1,5 @@
+import SelectOrganization from "./onboarding/select-organization/Page";
+
 export default function Home() {
-  return (
-      <h1>Ela Super yaxsi</h1>
-  );
+  return <SelectOrganization />;
 }
