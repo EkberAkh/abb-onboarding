@@ -13,10 +13,7 @@ function Page() {
       <div className="selectContainer">
         <Stack spacing={3}>
           <Select size="md">
-            <option value="option1" className="option_first">
-              <div >Teşkilatın adı</div>
-              <div>Teşkiilatın VÖEN-i</div>
-            </option>
+            <option>Teşkilatın adı</option>
           </Select>
         </Stack>
       </div>
