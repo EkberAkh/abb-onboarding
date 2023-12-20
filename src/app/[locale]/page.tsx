@@ -27,7 +27,7 @@ export default function Home() {
               >Qeydiyyatdan keçmək üçün Asan İmza ilə daxil olun.</Text>
             </HStack>
             <SignForm/>
-          <Checkbox m='8px 32px' p='10px 12px'> Mən <Link href={"/"} color="blue.500">qaydalar və şərtlərlə </Link>razıyam</Checkbox>
+          <Checkbox m='8px 32px' p='10px 12px'> Mən <Link href={"/"}>qaydalar və şərtlərlə </Link>razıyam</Checkbox>
           <Box p='0 32px' w='100%'>
             <Button 
             w='100%'
@@ -36,7 +36,6 @@ export default function Home() {
             color='white' 
             fontSize='16px'>Daxil ol</Button>
           </Box>
-          
       </VStack>
       <SignFooter/>
     </VStack>
