@@ -1,16 +1,16 @@
 import React from "react";
 import { Button, Select, Stack } from "@chakra-ui/react";
-import "../../globals.css";
+import styles from './index.module.css';
 
 function Page() {
   return (
-    <div className="container">
-      <h1 className="title">Təşkilatı seçin</h1>
-      <p className="subTitle">
+    <div className={styles.container}>
+      <h1 className={styles.title}>Təşkilatı seçin</h1>
+      <p className={styles.subTitle}>
         Qeydiyyatdan keçirmək istədiyiniz şirkəti seçməniz xahiş olunur
       </p>
 
-      <div className="selectContainer">
+      <div className={styles.selectContainer}>
         <Stack spacing={3}>
           <Select size="md">
             <option>Teşkilatın adı</option>
@@ -18,7 +18,7 @@ function Page() {
         </Stack>
       </div>
 
-      <div className="buttonContainer">
+      <div className={styles.buttonContainer}>
         <Button colorScheme="blue">Davam et </Button>
 
         <Button
