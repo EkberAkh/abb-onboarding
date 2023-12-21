@@ -1,0 +1,16 @@
+{
+  "organizations": [
+    {
+      "name": "ABB Corporation",
+      "tin": "123-456-789"
+    },
+    {
+      "name": "XYZ Enterprises",
+      "tin": "987-654-321"
+    },
+    {
+      "name": "XYZ Enterprises",
+      "tin": "987-654-321"
+    }
+  ]
+}
