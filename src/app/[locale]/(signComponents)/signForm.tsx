@@ -1,5 +1,5 @@
 "use client"
-import { VStack,FormControl, FormLabel, Input, FormErrorMessage, Text, useToast} from "@chakra-ui/react"
+import { VStack,FormControl, FormLabel, Input, FormErrorMessage, Text, useToast,InputGroup,InputLeftAddon} from "@chakra-ui/react"
 import { Controller, Form, useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -44,33 +44,41 @@ const SignForm = () => {
           >
           <FormControl gap='8px' mb='24px' isInvalid={!!errors?.phoneNumber}>
             <FormLabel >ASAN İmza Mobil nömrə</FormLabel>
-            <Controller
-              name="phoneNumber"
-              control={control}
-              rules={{
-                required: "Mobil nömrə qeyd olunmayıb",
-                validate: (value: string) => {
-                  if (value.length !== 9) {
-                    return "Nömrə formatı düzgün deyil";
-                  }
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  borderLeft="0"
-                  type="tel"
-                  placeholder="+994 _ __ _ _"
-                  borderColor="gray.300"
-                  w="100%"
-                  maxLength={9}
-                  onChange={(e) => {
-                    field.onChange(e);
-                    setinputTextValue(field.value);
+            <InputGroup w="100%">
+                <InputLeftAddon color="gray.700" bg="gray.100">
+                  +994
+                </InputLeftAddon>
+                <Controller
+                  name="phoneNumber"
+                  control={control}
+                  rules={{
+                    required: "Asan ID qeyd olunmayıb",
+                    validate: (value: string) => {
+                      if (value.length !== 9) {
+                        return "Asan ID düzgün deyil";
+                      }
+                      return undefined;
+                    },
                   }}
-                /> 
-              )}
-            />
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      borderLeft="0"
+                      borderTopLeftRadius={0}
+                      borderBottomLeftRadius={0}
+                      type="tel"
+                      placeholder="00 000 00 00"
+                      borderColor="gray.300"
+                      w="100%"
+                      maxLength={9}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setinputTextValue(field.value);
+                      }}
+                    />
+                  )}
+                />
+              </InputGroup>
             <FormErrorMessage mt="0.5rem">
                 {errors?.phoneNumber?.message}
               </FormErrorMessage>

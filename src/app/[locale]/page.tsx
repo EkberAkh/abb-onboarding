@@ -27,7 +27,7 @@ export default function Home() {
               >Qeydiyyatdan keçmək üçün Asan İmza ilə daxil olun.</Text>
             </VStack>
             <SignForm/>
-          <Checkbox defaultChecked> Mən <Link href={"/"}>qaydalar və şərtlərlə </Link>razıyam</Checkbox>
+          <Checkbox> Mən <Link  href={"/"}>qaydalar və şərtlərlə </Link>razıyam</Checkbox>
           <Box w='100%'>
             <Button 
             w='100%'
