@@ -42,14 +42,14 @@ const Step3 = () => {
     { title: "Şəxsi məlumatlar" },
   ];
 
-  const router = useRouter()
+  const router = useRouter();
 
   const { activeStep } = useSteps({
     index: 2,
     count: steps.length,
   });
   return (
-    <Stack width='100%' height="100vh" bg="#F3F3F3">
+    <Stack width="100%" height="100vh" bg="#F3F3F3">
       <HStack bg="#fff" px="32px" height="64px" alignItems="center">
         <Image alt="logo" src="../images/logo-business.svg" height="33px" />
         <Flex w="100%" alignItems="center" justifyContent="flex-end">
@@ -196,7 +196,10 @@ const Step3 = () => {
                 </Box>
                 <Box width="100%">
                   <FormLabel>E-poçt</FormLabel>
-                  <Input placeholder="Elektron ünvanı daxil edin" color="gray.500" />
+                  <Input
+                    placeholder="Elektron ünvanı daxil edin"
+                    color="gray.500"
+                  />
                 </Box>
               </VStack>
             </Flex>
@@ -209,12 +212,12 @@ const Step3 = () => {
             gap="16px"
           >
             <Button
-              onClick={()=>{
-                router.back()
+              onClick={() => {
+                router.back();
               }}
-            // mt="32px"
+              // mt="32px"
 
-            // onClick={() => setStep(0)} variant="gray"
+              // onClick={() => setStep(0)} variant="gray"
             >
               Geriyə
               {/* {t('common:actions.back')} */}
@@ -224,8 +227,8 @@ const Step3 = () => {
               color="#fff"
               //  isDisabled={!isValid} mt="32px" onClick={() => setStep(2)}
               // ml="16px"
-              onClick={()=>{
-                router.push('asan-imza-pin-3')
+              onClick={() => {
+                router.push("asan-imza-pin-3");
               }}
             >
               Tamamla
