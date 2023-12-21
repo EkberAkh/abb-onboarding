@@ -10,7 +10,7 @@ function page() {
 
   const handleContinue = () => {
     const organizationExists = data.organizations.some(
-      (org) => org.name === selectedOrganization
+      (org) => org.tin === selectedOrganization
     );
 
     if (organizationExists) {
@@ -23,7 +23,7 @@ function page() {
     <div className={pageCss.containerWrapper}>
       {alert && (
         <Stack spacing={3}>
-          <Alert status="error">
+          <Alert status="error" maxWidth="504px">
             <AlertIcon />
             Qeyd olunan VÖEN artıq İnternet Bankçılıqda mövcuddur. Yeni ASAN
             nömrənin əlavə olunması üçün qeydiyyatdan keçdiyiniz ASAN nömrə ilə
@@ -44,9 +44,8 @@ function page() {
               value={selectedOrganization}
               onChange={(e) => setSelectedOrganization(e.target.value)}
             >
-              <option>Teşkilatın adı</option>
               {data.organizations.map((org, index) => (
-                <option key={index}>{org.name}</option>
+                <option key={index}>{org.tin}</option>
               ))}
             </Select>
           </Stack>
