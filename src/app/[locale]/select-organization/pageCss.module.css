@@ -1,0 +1,49 @@
+.containerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .container {
+    max-width: 550px;
+    margin: 20px;
+    padding: 20px;
+  }
+  .selectContainer {
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .option_first {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .option_first div {
+    margin-bottom: 5px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  
+  .buttonContainer button {
+    margin-bottom: 10px;
+  }
+  .title {
+    color: #1a202c;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    margin-bottom: 8px;
+  }
+  .subTitle {
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 16px;
+  }
