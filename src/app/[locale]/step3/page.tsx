@@ -33,6 +33,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const Step3 = () => {
   const steps = [
@@ -41,15 +42,16 @@ const Step3 = () => {
     { title: "Şəxsi məlumatlar" },
   ];
 
+  const router = useRouter()
+
   const { activeStep } = useSteps({
     index: 2,
     count: steps.length,
   });
-
   return (
-    <Stack height="100vh" bg="#F3F3F3">
+    <Stack width='100%' height="100vh" bg="#F3F3F3">
       <HStack bg="#fff" px="32px" height="64px" alignItems="center">
-        <Image alt="logo" src="/images/logo-business.svg" height="33px" />
+        <Image alt="logo" src="../images/logo-business.svg" height="33px" />
         <Flex w="100%" alignItems="center" justifyContent="flex-end">
           <Flex
             w="120px"
@@ -76,7 +78,7 @@ const Step3 = () => {
                 w="24px"
                 h="24px"
                 borderRadius="50%"
-                src="/images/flags/az.png"
+                src="../images/flags/az.png"
                 alt=""
               />
             </Flex>
@@ -207,6 +209,9 @@ const Step3 = () => {
             gap="16px"
           >
             <Button
+              onClick={()=>{
+                router.back()
+              }}
             // mt="32px"
 
             // onClick={() => setStep(0)} variant="gray"
@@ -219,6 +224,9 @@ const Step3 = () => {
               color="#fff"
               //  isDisabled={!isValid} mt="32px" onClick={() => setStep(2)}
               // ml="16px"
+              onClick={()=>{
+                router.push('asan-imza-pin-3')
+              }}
             >
               Tamamla
               {/* {t('common:actions.submit')} */}

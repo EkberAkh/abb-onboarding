@@ -1,19 +1,14 @@
 "use client";
 import {
-  Alert,
-  AlertIcon,
+ 
   Box,
   Button,
-  Container,
   Divider,
   Flex,
-  FormControl,
   HStack,
   Image,
-  Skeleton,
   Stack,
   Step,
-  StepDescription,
   StepIcon,
   StepIndicator,
   StepNumber,
@@ -28,10 +23,11 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Step2 = () => {
+  const router = useRouter()
   const steps = [
     { title: "Asan İmza" },
     { title: "Müştəri məlumatları" },
@@ -44,9 +40,9 @@ const Step2 = () => {
   });
 
   return (
-    <Stack height="100vh" bg="#F3F3F3">
+    <Stack width='100%' height="100vh" bg="#F3F3F3">
       <HStack bg="#fff" px="32px" height="64px" alignItems="center">
-        <Image alt="logo" src="/images/logo-business.svg" height="33px" />
+        <Image alt="logo" src="../images/logo-business.svg" height="33px" />
         <Flex w="100%" alignItems="center" justifyContent="flex-end">
           <Flex
             w="120px"
@@ -73,7 +69,7 @@ const Step2 = () => {
                 w="24px"
                 h="24px"
                 borderRadius="50%"
-                src="/images/flags/az.png"
+                src="../images/flags/az.png"
                 alt=""
               />
             </Flex>
@@ -137,22 +133,19 @@ const Step2 = () => {
               fontWeight="600"
               fontSize={{ base: "sm", md: "md" }}
             >
-              {/* {step} */} 2
+             2
             </Text>
             <Box ml="24px">
               <Text fontSize={{ base: "md", md: "xl" }} fontWeight="600">
-                {/* {description}   */} Müştəri məlumatları
+               Müştəri məlumatları
               </Text>
               <Text fontSize={{ base: "sm", md: "md" }} color="#4A5568">
-                {/* {t('add_info')} */} Aşağıdakı məlumatları daxil edin
+                 Aşağıdakı məlumatları daxil edin
               </Text>
             </Box>
           </Flex>
 
-          {/* <HeaderStep
-        step="2"
-        description={asanImza?.payerTypeResponse === 'PERSONAL' ? t('company.user_info') : t('company.customer_info')}
-      /> */}
+        
           <Flex
             border="1px solid #CBD5E0"
             borderRadius="6px"
@@ -168,12 +161,7 @@ const Step2 = () => {
               <option value="option2">Option 2</option>
               <option value="option3">Option 3</option>
             </Select>
-            {/* <CustomerSelect
-          name={t('company.branch_choose')}
-          data={formattedValue}
-          controllerName="branchCode"
-          size="100%"
-        /> */}
+          
             <Divider my="24px" />
             <Flex width="100%" gap="24px">
               <VStack width="48%" gap="24px">
@@ -229,6 +217,7 @@ const Step2 = () => {
               {/* {t('common:actions.back')} */}
             </Button>
             <Button
+            onClick={()=>{router.push('step3')}}
             bg='#2058BB' color='#fff'
               //  isDisabled={!isValid} mt="32px" onClick={() => setStep(2)}
               // ml="16px"
