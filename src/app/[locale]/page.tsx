@@ -8,7 +8,7 @@ import SignFooter from "./(signComponents)/signFooter";
 export default function Home() {
   
   return (
-    <VStack  height='100%' padding='10px' width='100%'>
+    <VStack  height='100vh' padding='10px' width='100%' justifyContent='space-between'>
       <Button  alignSelf='flex-end' border='none' bg='gray.100' color='gray.700' p='8px'>x</Button>
       <VStack gap='14px' padding='12px' alignItems='flex-start' justifyContent='center'>
         <Box >
