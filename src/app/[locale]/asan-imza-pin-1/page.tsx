@@ -42,7 +42,7 @@ const AsanImzaPinOne = () => {
         px="24px"
       >
         <VStack>
-          <Image src="/images/logo-customer.svg" alt="logo" />
+          <Image src="../images/Loading.png" alt="logo" />
         </VStack>
         <Heading
           textAlign="center"

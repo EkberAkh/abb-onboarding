@@ -23,6 +23,7 @@ import {
   VStack,
   useSteps,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Step1 = () => {
@@ -36,11 +37,11 @@ const Step1 = () => {
     index: 0,
     count: steps.length,
   });
-
+const router = useRouter()
   return (
-    <Stack height="100vh" bg="#F3F3F3">
+    <Stack width='100%' height="100vh" bg="#F3F3F3">
       <HStack bg="#fff" px="32px" height="64px" alignItems="center">
-        <Image alt="logo" src="/images/logo-business.svg" height="33px" />
+        <Image alt="logo" src="../images/logo-business.svg" height="33px" />
         <Flex w="100%" alignItems="center" justifyContent="flex-end">
           <Flex
             w="120px"
@@ -67,7 +68,7 @@ const Step1 = () => {
                 w="24px"
                 h="24px"
                 borderRadius="50%"
-                src="/images/flags/az.png"
+                src="../images/flags/az.png"
                 alt=""
               />
             </Flex>
@@ -134,7 +135,7 @@ const Step1 = () => {
             borderRadius="6px"
             mb="24px"
           >
-            <Image alt="check" src="/images/check.svg" />
+            <Image alt="check" src="../images/check.svg" />
             <Text
               ml="16px"
               fontSize={{ base: "md", md: "lg" }}
@@ -190,7 +191,7 @@ const Step1 = () => {
                     mr="8px"
                     border="1px solid #E2E8F0"
                   >
-                    <Image alt="check" src="/images/phone.svg" />
+                    <Image alt="check" src="../images/phone.svg" />
                     <Text
                       fontSize={{ base: "xs", md: "14px" }}
                       fontWeight="500"
@@ -207,7 +208,7 @@ const Step1 = () => {
                     alignItems="center"
                     border="1px solid #E2E8F0"
                   >
-                    <Image alt="check" src="/images/document.svg" />
+                    <Image alt="check" src="../images/document.svg" />
                     <Text color="#4A5568" fontSize={{ base: "xs", md: "14px" }}>
                       {/* {asanImza?.voen} */}
                       12345678902
@@ -216,7 +217,7 @@ const Step1 = () => {
                 </HStack>
               </Box>
             </Flex>
-            <Image src="/images/asan.svg" alt="Asan Logo" />
+            <Image src="../images/asan.svg" alt="Asan Logo" />
           </Flex>
           <Flex mt="24px" justifyContent="flex-end">
             <Button
@@ -224,8 +225,11 @@ const Step1 = () => {
               // isDisabled={!asanImza?.companyResident}
               // onClick={() => setStep(1)}
               colorScheme="brand"
+              onClick={()=>{
+                router.push('step2')
+              }}
             >
-              {/* {t('common:actions.submit')} */}
+              Davam et
             </Button>
           </Flex>
         </Flex>

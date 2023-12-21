@@ -10,7 +10,7 @@ function page() {
 
   const handleContinue = () => {
     const organizationExists = data.organizations.some(
-      (org) => org.name === selectedOrganization
+      (org) => org.tin === selectedOrganization
     );
 
     if (organizationExists) {
@@ -23,7 +23,7 @@ function page() {
     <div className={pageCss.containerWrapper}>
       {alert && (
         <Stack spacing={3}>
-          <Alert status="error">
+          <Alert maxWidth='504px' status="error">
             <AlertIcon />
             Qeyd olunan VÖEN artıq İnternet Bankçılıqda mövcuddur. Yeni ASAN
             nömrənin əlavə olunması üçün qeydiyyatdan keçdiyiniz ASAN nömrə ilə
@@ -46,14 +46,15 @@ function page() {
             >
               <option>Teşkilatın adı</option>
               {data.organizations.map((org, index) => (
-                <option key={index}>{org.name}</option>
+                <option key={index}>{org.tin}</option>
               ))}
             </Select>
           </Stack>
         </div>
 
         <div className={pageCss.buttonContainer}>
-          <Button colorScheme="blue" onClick={handleContinue}>
+          <Button backgroundColor="
+#2058BB" opacity='.3' onClick={handleContinue}>
             Davam et
           </Button>
 
@@ -63,6 +64,12 @@ function page() {
             width="500px"
             border="2px"
             borderColor="transparent"
+            backgroundColor='
+            #EDF2F7'
+            color='
+            #1A202C'
+            opacity='.8'
+            _hover={{opacity:1}}
           >
             İmtina et
           </Button>
