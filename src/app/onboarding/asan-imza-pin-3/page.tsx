@@ -17,7 +17,7 @@ const AsanImzaPinThree = () => {
       </VStack>
       <CloseButton onClick={clickHandler} position='absolute' right='24px' top='24px' background='#EDF2F7'  _hover={{ backgroundColor: 'gray.200'}} />
       <Container as='div' display='flex' justifyContent='center' flexDirection='column' height='100vh' gap='16px' maxW='500px' px='24px'>
-          <VStack ><Image src='/abb_logo.svg' alt='logo'/></VStack>
+          <VStack ><Image src='/images/logo-customer.svg' alt='logo'/></VStack>
           <Heading textAlign='center' color="#000" fontSize='24px' fontWeight='600' lineHeight='30px'>Sorğunuz icradadır</Heading>
           <Text textAlign='center' fontSize='18px' fontWeight='400' lineHeight='28px' color='#4A5568'>Hörmətli müştəri, qısa müddət ərzində prosesinin nəticəsi ilə bağlı mail vasitəsi ilə Sizə məlumat veriləcəkdir.</Text>
       </Container>

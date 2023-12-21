@@ -1,54 +1,22 @@
 "use client";
-import {
-  Box,
-  Container,
-  Heading,
-  Progress,
-  Text,
-  Button,
-  Image,
-  Stack,
-  CloseButton,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Container, Heading, Progress, Text, Button, Image, Stack, CloseButton, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AsanImzaPinOne = () => {
-  const useCountDown = (mins: number) => {
-    const [secs, decrement] = useState(mins * 60);
-    const [progress, increment] = useState(0);
-
-    useEffect(() => {
-      if (secs > 0) {
-        const progressLevel = setInterval(() => {
-          increment(progress + 100 / (mins * 60));
-          decrement(secs - 1);
-        }, 1000);
-
-        return () => clearInterval(progressLevel);
-      }
-    }, [progress, secs, mins]);
-    return [progress];
-  };
-  const [progress] = useCountDown(1.28);
-  // const pin1VerificationCode = localStorage.getItem('verificationCode');
+  const [progressValue, setProgressValue] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      router.push("/");
-      // localStorage.removeItem('sessionId');
-      // localStorage.removeItem('verificationCode');
-    }, 80000);
-    return () => clearTimeout(timer);
-  }, [router]);
+    const timer = setInterval(() => {
+      setProgressValue((prevValue) => Math.min(prevValue + 100 / 1000, 100));
+    }, 10);
 
-  // const { mutate } = usePin1Check();
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
-  // React.useMemo(() => {
-  //   mutate();
-  // }, [mutate]);
   const clickHandler = () => {
     router.push("/onboarding");
   };
@@ -93,7 +61,7 @@ const AsanImzaPinOne = () => {
           color="rgba(0, 0, 0, 0.50)"
         >
           Telefonunuza daxil olan kodu aşağıdakı kodu ilə eyni olmasını müqayisə
-          edin və ASAN PIN1 ilə təsdiqləyin.
+          edin və ASAN PIN2 ilə təsdiqləyin.
         </Text>
         <Box border="1px solid #E4E4E4" borderRadius="12px">
           <Box as="div" p="24px" textAlign="center">
@@ -115,16 +83,7 @@ const AsanImzaPinOne = () => {
               2123
             </Text>
           </Box>
-          <Progress
-            color="#2058BB"
-            size="xs"
-            position="absolute"
-            left="0"
-            right="0"
-            bottom="0"
-            height="7px"
-            value={progress}
-          />
+          <Progress value={progressValue} borderRadius="full" />
         </Box>
         <Button
           colorScheme="white"
