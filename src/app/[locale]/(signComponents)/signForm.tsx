@@ -15,11 +15,22 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { Controller, Form, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import IMask from "imask";
 
 const SignForm = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
+  const phoneNumberId = "phone-number-input";
+
+  useEffect(() => {
+    const phoneNumberInput = document.getElementById(phoneNumberId);
+    if (phoneNumberInput) {
+      IMask(phoneNumberInput, {
+        mask: "00 000 00 00",
+      });
+    }
+  }, []);
 
   const {
     control,
@@ -47,11 +58,11 @@ const SignForm = () => {
 
   const checkFormValidity = () => {
     const values = getValues();
-    const isPhoneValid = !!values.phoneNumber && values.phoneNumber.length === 9;
+    const isPhoneValid =
+      !!values.phoneNumber && values.phoneNumber.length === 9;
     const isPasswordValid = !!values.password && values.password.length === 6;
     setIsInputValid(isPhoneValid && isPasswordValid);
   };
-  
 
   const submitFunc = () => {
     console.log(getValues("phoneNumber"));
@@ -73,7 +84,7 @@ const SignForm = () => {
               rules={{
                 required: "Asan ID qeyd olunmayıb",
                 validate: (value: string) => {
-                  if (value.length !== 9) {
+                  if (value.length !== 12) {
                     return "Asan ID düzgün deyil";
                   }
                   return undefined;
@@ -82,6 +93,7 @@ const SignForm = () => {
               render={({ field }) => (
                 <Input
                   {...field}
+                  id={phoneNumberId}
                   borderLeft="0"
                   borderTopLeftRadius={0}
                   borderBottomLeftRadius={0}
@@ -89,7 +101,7 @@ const SignForm = () => {
                   placeholder="00 000 00 00"
                   borderColor="gray.300"
                   w="100%"
-                  maxLength={9}
+                  maxLength={12}
                   onChange={(e) => {
                     field.onChange(e);
                     handleInputChange();
@@ -140,7 +152,11 @@ const SignForm = () => {
             </Text>
           )}
         </FormControl>
-        <Checkbox mb="20px" isChecked={isChecked} onChange={handleCheckboxChange}>
+        <Checkbox
+          mb="20px"
+          isChecked={isChecked}
+          onChange={handleCheckboxChange}
+        >
           {" "}
           Mən{" "}
           <Link href={"az/terms-and-conditions"}>qaydalar və şərtlərlə </Link>
