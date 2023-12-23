@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Container,
@@ -13,13 +13,21 @@ import {
 import { useRouter } from "next/navigation";
 
 const TermsAndConditions = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const handleClose = () => {
+    router.back();
+  };
   return (
     <>
-  
-
       <Container maxWidth="1110px" height="1570px">
-      <CloseButton position='absolute' right={0} top={0} size="lg" m="30px" />
+        <CloseButton
+          position="absolute"
+          right={0}
+          top={0}
+          size="lg"
+          m="30px"
+          onClick={handleClose}
+        />
 
         <Center>
           <Image textAlign="center" src="../images/Loading.png" alt="logo" />
@@ -121,9 +129,14 @@ const TermsAndConditions = () => {
         <Flex mt="70px" gap="20px">
           <Spacer />
           <Button colorScheme="gray">İmtina et</Button>
-          <Button onClick={()=>{
-            router.push("asan-imza-pin-1")
-          }} colorScheme="blue">Təsdiq edirəm</Button>
+          <Button
+            onClick={() => {
+              router.push("asan-imza-pin-1");
+            }}
+            colorScheme="blue"
+          >
+            Təsdiq edirəm
+          </Button>
         </Flex>
       </Container>
     </>

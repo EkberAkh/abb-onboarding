@@ -1,5 +1,16 @@
 "use client";
-import { Box, Container, Heading, Progress, Text, Button, Image, Stack, CloseButton, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Heading,
+  Progress,
+  Text,
+  Button,
+  Image,
+  Stack,
+  CloseButton,
+  VStack,
+} from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -18,12 +29,13 @@ const AsanImzaPinOne = () => {
   }, []);
 
   const clickHandler = () => {
-    router.push("/onboarding");
+    router.push("/");
   };
 
   return (
-    <Stack position="relative">
+    <Stack position="relative" width="100%">
       <CloseButton
+        alignSelf="flex-end"
         onClick={clickHandler}
         position="absolute"
         right="24px"
