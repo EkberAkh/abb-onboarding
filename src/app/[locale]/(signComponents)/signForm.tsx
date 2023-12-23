@@ -59,7 +59,7 @@ const SignForm = () => {
   const checkFormValidity = () => {
     const values = getValues();
     const isPhoneValid =
-      !!values.phoneNumber && values.phoneNumber.length === 9;
+      !!values.phoneNumber && values.phoneNumber.length === 12;
     const isPasswordValid = !!values.password && values.password.length === 6;
     setIsInputValid(isPhoneValid && isPasswordValid);
   };
@@ -102,10 +102,17 @@ const SignForm = () => {
                   borderColor="gray.300"
                   w="100%"
                   maxLength={12}
+                  autoComplete="off"
                   onChange={(e) => {
                     field.onChange(e);
                     handleInputChange();
                   }}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').replace(/\D/g, ''); // Remove non-digits
+                    // Format and set pasted data according to your mask logic
+                  }}
+
                 />
               )}
             />
