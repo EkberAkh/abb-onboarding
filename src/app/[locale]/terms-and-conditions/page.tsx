@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Container,
   Text,
@@ -8,8 +10,10 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 const TermsAndConditions = () => {
+  const router = useRouter()
   return (
     <>
   
@@ -114,11 +118,12 @@ const TermsAndConditions = () => {
             bilərsiniz.
           </Text>
         </Flex>
-
         <Flex mt="70px" gap="20px">
           <Spacer />
           <Button colorScheme="gray">İmtina et</Button>
-          <Button colorScheme="blue">Təsdiq edirəm</Button>
+          <Button onClick={()=>{
+            router.push("asan-imza-pin-1")
+          }} colorScheme="blue">Təsdiq edirəm</Button>
         </Flex>
       </Container>
     </>

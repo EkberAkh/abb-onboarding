@@ -42,7 +42,7 @@ const SignForm = () => {
             //   })
             // }
           >
-          <FormControl gap='8px' mb='24px' isInvalid={!!errors?.phoneNumber}>
+          <FormControl  gap='8px' mb='24px' isInvalid={!!errors?.phoneNumber}>
             <FormLabel >ASAN İmza Mobil nömrə</FormLabel>
             <InputGroup w="100%">
                 <InputLeftAddon color="gray.700" bg="gray.100">
