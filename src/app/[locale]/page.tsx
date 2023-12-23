@@ -19,12 +19,10 @@ import SignFooter from "./(signComponents)/signFooter";
 
 export default function Home() {
   return (
-    <VStack padding="10px" width="100%" justifyContent="space-between">
+    <VStack padding="24px" width="100%" justifyContent="space-between">
        <CloseButton
         alignSelf="flex-end"
-        position="absolute"
-        right="24px"
-        top="24px"
+       
         background="#EDF2F7"
         _hover={{ backgroundColor: "gray.200" }}
       />
