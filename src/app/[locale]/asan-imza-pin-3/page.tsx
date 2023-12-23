@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 const AsanImzaPinThree = () => {
   const router = useRouter();
   const clickHandler = () => {
-    router.back();
+    router.push("/");
   }
   return (
-    <Stack height='100%' width='100%' >
+    <Stack height='100%' width='100%' padding="24px">
       <VStack mt='40px' w='100%' position='absolute'>
       <Alert borderRadius='6px' maxWidth='504px' status='error'>
         <AlertIcon />
