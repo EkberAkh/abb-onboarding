@@ -1,33 +1,39 @@
-"use client";
-import { useState } from "react";
+'use client'
+import { useState, useEffect } from "react";
 import { Button, Select, Stack, Alert, AlertIcon } from "@chakra-ui/react";
 import pageCss from "./pageCss.module.css";
-import data from "./mockData.json";
-
-function page() {
+import { useRouter } from "next/navigation";
+interface Organization {
+  organizationName: string;
+  organizationCode: string;
+}
+function Page() {
   const [selectedOrganization, setSelectedOrganization] = useState("");
+  const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [alert, setAlert] = useState(false);
 
-  const handleContinue = () => {
-    const organizationExists = data.organizations.some(
-      (org) => org.tin === selectedOrganization
-    );
-
-    if (organizationExists) {
-      setAlert(true);
-    }
-    return;
-  };
-
+  useEffect(() => {
+    fetch("https://mock-api-login-abb.vercel.app/onboarding-ms/v1/certificates")
+      .then(response => response.json())
+      .then(data => {
+        setOrganizations(data);
+      })
+      .catch(error => {
+        console.error("Error fetching data: ", error);
+        setAlert(true); // Show alert on error
+      });
+  }, []);
+  const router = useRouter()
+const rejectHandler = ()=>{
+router.push('/')
+}
   return (
     <div className={pageCss.containerWrapper}>
       {alert && (
         <Stack spacing={3}>
           <Alert maxWidth="504px" status="error">
             <AlertIcon />
-            Qeyd olunan VÖEN artıq İnternet Bankçılıqda mövcuddur. Yeni ASAN
-            nömrənin əlavə olunması üçün qeydiyyatdan keçdiyiniz ASAN nömrə ilə
-            daxil olmağınız xahiş olunur.
+            There was a problem fetching organization data.
           </Alert>
         </Stack>
       )}
@@ -44,9 +50,10 @@ function page() {
               value={selectedOrganization}
               onChange={(e) => setSelectedOrganization(e.target.value)}
             >
-              <option>Teşkilatın adı</option>
-              {data.organizations.map((org, index) => (
-                <option key={index}>{org.tin}</option>
+              {organizations.map(org => (
+                <option key={org.organizationCode} value={org.organizationCode}>
+                  {org.organizationName} ({org.organizationCode})
+                </option>
               ))}
             </Select>
           </Stack>
@@ -55,8 +62,8 @@ function page() {
         <div className={pageCss.buttonContainer}>
           <Button
             backgroundColor="#2058BB"
-            opacity=".3"
-            onClick={handleContinue}
+            opacity={selectedOrganization ? "1" : ".3"}
+            disabled={!selectedOrganization}
           >
             Davam et
           </Button>
@@ -67,12 +74,11 @@ function page() {
             width="500px"
             border="2px"
             borderColor="transparent"
-            backgroundColor="
-            #EDF2F7"
-            color="
-            #1A202C"
+            backgroundColor="#EDF2F7"
+            color="#1A202C"
             opacity=".8"
             _hover={{ opacity: 1 }}
+            onClick={rejectHandler}
           >
             İmtina et
           </Button>
@@ -82,4 +88,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

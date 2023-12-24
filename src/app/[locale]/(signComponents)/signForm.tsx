@@ -13,10 +13,17 @@ import {
   Button,
   Checkbox,
   Link,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  CloseButton,
+  Spinner,
 } from "@chakra-ui/react";
 import { Controller, Form, useForm } from "react-hook-form";
 import { useCallback, useEffect, useRef, useState } from "react";
 import IMask from "imask";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const SignForm = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -32,6 +39,10 @@ const SignForm = () => {
     }
   }, []);
 
+  const onClose = () => {
+    setIsErr(false);
+  };
+  const [isLoading, setIsLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -69,8 +80,62 @@ const SignForm = () => {
     console.log(getValues("password"));
   };
 
+  const router = useRouter();
+  const [isErr, setIsErr] = useState(false);
+  const buttonClick = async () => {
+    setIsLoading(true);
+    let phoneNumber = getValues("phoneNumber").split(" ").join("");
+    let asanId = getValues("password");
+    console.log(phoneNumber);
+
+    const requestData = {
+      phoneNumber: `+994${phoneNumber}`,
+      asanId: asanId,
+    };
+    try {
+      const response = await fetch(
+        "https://mock-api-login-abb.vercel.app/onboarding-ms/v1/auth",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(responseData);
+      const verificationCode = responseData.verificationCode
+      const url = `/az/asan-imza-pin-1?verificationCode=${encodeURIComponent(verificationCode)}`;
+      router.push(url);
+    } catch (error) {
+      console.error("Error making the request:", error);
+      setIsErr(true);
+    } finally{
+      setIsLoading(false); 
+    }
+  };
+
+  const t = useTranslations();
+
   return (
     <VStack gap="24px" w="100%">
+      {isErr && (
+        <Alert status="error" borderRadius="5px">
+          <AlertIcon />
+          <AlertDescription>{t("onboarding.errors.2004")}</AlertDescription>
+          <CloseButton
+            alignSelf="flex-start"
+            position="relative"
+            right={-1}
+            top={-1}
+            onClick={onClose}
+          />
+        </Alert>
+      )}
       <form style={{ width: "100%" }} onSubmit={handleSubmit(submitFunc)}>
         <FormControl gap="8px" mb="24px" isInvalid={!!errors?.phoneNumber}>
           <FormLabel>ASAN İmza Mobil nömrə</FormLabel>
@@ -109,10 +174,10 @@ const SignForm = () => {
                   }}
                   onPaste={(e) => {
                     e.preventDefault();
-                    const pastedData = e.clipboardData.getData('text').replace(/\D/g, ''); // Remove non-digits
-                    // Format and set pasted data according to your mask logic
+                    const pastedData = e.clipboardData
+                      .getData("text")
+                      .replace(/\D/g, "");
                   }}
-
                 />
               )}
             />
@@ -171,6 +236,7 @@ const SignForm = () => {
         </Checkbox>
         <Box w="100%">
           <Button
+            onClick={buttonClick}
             type="submit"
             w="100%"
             p="8px 16px"
@@ -179,7 +245,7 @@ const SignForm = () => {
             isDisabled={!isChecked || !isInputValid}
             fontSize="16px"
           >
-            Daxil ol
+            {isLoading ? <Spinner/> : "Daxil ol"}
           </Button>
         </Box>
       </form>

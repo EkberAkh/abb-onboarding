@@ -1,4 +1,5 @@
 "use client";
+import useSWR from 'swr';
 import {
   Box,
   Container,
@@ -11,27 +12,40 @@ import {
   CloseButton,
   VStack,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { useRouter,useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AsanImzaPinOne = () => {
   const [progressValue, setProgressValue] = useState(0);
   const router = useRouter();
+const searchParams = useSearchParams()
+const fetcher = (url: string): Promise<any> => fetch(url).then(res => res.json());
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgressValue((prevValue) => Math.min(prevValue + 100 / 1000, 100));
-    }, 10);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+const { data, error } = useSWR(
+  'https://mock-api-login-abb.vercel.app/onboarding-ms/v1/auth/status/2a5a628a-d72b-4ba4-8157-8dc11c130093', 
+  fetcher, 
+  
+  {header:{ "Content-Type" : "applicaton/json"}, refreshInterval: 3000 }
+);
+console.log(data);
 
   const clickHandler = () => {
     router.push("/");
   };
+  useEffect(() => {
+    if (data) {
+      router.push('/az/select-organization');
+    } else {
+      setProgressValue(oldValue => Math.min(oldValue + 10, 100));
+    }
+  }, [data, router]);
 
+  if (error) {
+    console.error('Failed to fetch data:', error);
+  }
+  const verificationCode  = searchParams.get("verificationCode");
+  console.log(verificationCode);
+  
   return (
     <Stack position="relative" width="100%">
       <CloseButton
@@ -92,7 +106,7 @@ const AsanImzaPinOne = () => {
               fontWeight="600"
               lineHeight="32px"
             >
-              2123
+              {verificationCode}
             </Text>
           </Box>
           <Progress value={progressValue} borderRadius="full" />
