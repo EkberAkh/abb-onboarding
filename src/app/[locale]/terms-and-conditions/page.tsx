@@ -1,14 +1,13 @@
 "use client";
 
 import {
-  Container,
   Text,
   Flex,
   Spacer,
   CloseButton,
-  Center,
   Image,
   Button,
+  VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -20,7 +19,6 @@ const TermsAndConditions = () => {
   };
   return (
     <>
-      <Container pt="5%" pb="5%" w='100%' maxW='100vh'>
         <CloseButton
           position="absolute"
           right={0}
@@ -29,15 +27,11 @@ const TermsAndConditions = () => {
           onClick={handleClose}
           _hover={{ backgroundColor: "gray.200" }}
         />
-
-        <Center>
+      <VStack p='116px 165px' w='100%' m='0' alignItems='center'>
           <Image textAlign="center" src="../images/Loading.png" alt="logo" />
-        </Center>
-        <Center>
           <Text fontWeight="bold" fontSize="30px" m="30px">
             Qaydalar və Şərtlər
           </Text>
-        </Center>
         <Flex flexDirection="column" gap="15px" overflowY="scroll" w='100%' maxH='50vh'>
           <Text>
             Siz, “ABB” ASC internet bank xidməti vasitəsilə təqdim edilən onlayn
@@ -127,19 +121,19 @@ const TermsAndConditions = () => {
             bilərsiniz.
           </Text>
         </Flex>
-        <Flex mt="70px" gap="20px">
+        <Flex mt="70px" gap="20px" position='fixed' bottom='20px' right='165px'>
           <Spacer />
-          <Button colorScheme="gray" onClick={handleClose}>İmtina et</Button>
+          <Button colorScheme="blue" onClick={handleClose}>İmtina et</Button>
           <Button
             onClick={() => {
               router.push("/");
             }}
-            colorScheme="blue"
+            colorScheme='gray'
           >
-            Təsdiq edirəm
+            Təsdiq et
           </Button>
         </Flex>
-      </Container>
+      </VStack>
     </>
   );
 };
