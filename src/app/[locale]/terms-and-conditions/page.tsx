@@ -10,14 +10,17 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 const TermsAndConditions = () => {
   const router = useRouter();
   const handleClose = () => {
-    router.back();
+    router.push(`/${pathNameFirst}`);
   };
+  
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
   return (
     <>
       <Container pt="5%" pb="5%" w='100%' maxW='100vh'>
@@ -122,8 +125,8 @@ const TermsAndConditions = () => {
           <Text fontWeight="bold">4. Əlaqə məlumatları</Text>
           <Text>
             Xidmətə dair hər hansı bir sualınız yaranarsa, bizimlə
-            customer <Link href={'/'} style={{ color: "rgb(32, 88, 187)" }}>service@ibar.az</Link> e-mail ünvanı və ya <Link style={{ color: "rgb(32, 88, 187)" }} href={'/'}>+994 12 493 00 91 (1711)</Link>
-            , <Link style={{ color: "rgb(32, 88, 187)" }} href={'/'}>+994 51 226 44 47</Link> telefon nömrələri vasitəsilə əlaqə saxlaya
+            customer <Link href={`/${pathNameFirst}`} style={{ color: "rgb(32, 88, 187)" }}>service@ibar.az</Link> e-mail ünvanı və ya <Link style={{ color: "rgb(32, 88, 187)" }} href={`/${pathNameFirst}`}>+994 12 493 00 91 (1711)</Link>
+            , <Link style={{ color: "rgb(32, 88, 187)" }} href={`/${pathNameFirst}`}>+994 51 226 44 47</Link> telefon nömrələri vasitəsilə əlaqə saxlaya
             bilərsiniz.
           </Text>
         </Flex>
@@ -132,7 +135,7 @@ const TermsAndConditions = () => {
           <Button colorScheme="gray" onClick={handleClose}>İmtina et</Button>
           <Button
             onClick={() => {
-              router.push("/");
+              router.push(`/${pathNameFirst}`);
             }}
             colorScheme="blue"
           >
