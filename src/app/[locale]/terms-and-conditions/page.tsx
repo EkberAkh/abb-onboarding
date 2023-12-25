@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Container,
   Text,
@@ -8,14 +10,24 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 const TermsAndConditions = () => {
+  const router = useRouter();
+  const handleClose = () => {
+    router.back();
+  };
   return (
     <>
-  
-
-      <Container maxWidth="1110px" height="1570px">
-      <CloseButton position='absolute' right={0} top={0} size="lg" m="30px" />
+      <Container pt="5%" pb="5%" w='100%' maxW='100vh'>
+        <CloseButton
+          position="absolute"
+          right={0}
+          top={0}
+          m="30px"
+          onClick={handleClose}
+          _hover={{ backgroundColor: "gray.200" }}
+        />
 
         <Center>
           <Image textAlign="center" src="../images/Loading.png" alt="logo" />
@@ -25,7 +37,7 @@ const TermsAndConditions = () => {
             Qaydalar və Şərtlər
           </Text>
         </Center>
-        <Flex flexDirection="column" gap="15px">
+        <Flex flexDirection="column" gap="15px" overflowY="scroll" w='100%' maxH='50vh'>
           <Text>
             Siz, “ABB” ASC internet bank xidməti vasitəsilə təqdim edilən onlayn
             qeydiyyatdan keçmə və bank hesabının açılması xidmətindən (Xidmət)
@@ -114,11 +126,17 @@ const TermsAndConditions = () => {
             bilərsiniz.
           </Text>
         </Flex>
-
         <Flex mt="70px" gap="20px">
           <Spacer />
-          <Button colorScheme="gray">İmtina et</Button>
-          <Button colorScheme="blue">Təsdiq edirəm</Button>
+          <Button colorScheme="gray" onClick={handleClose}>İmtina et</Button>
+          <Button
+            onClick={() => {
+              router.push("/");
+            }}
+            colorScheme="blue"
+          >
+            Təsdiq edirəm
+          </Button>
         </Flex>
       </Container>
     </>
