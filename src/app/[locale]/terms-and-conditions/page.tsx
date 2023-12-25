@@ -19,7 +19,7 @@ const TermsAndConditions = () => {
   };
   return (
     <>
-      <Container maxWidth="1110px" height="1570px">
+      <Container pt="5%" pb="5%" w='100%' maxW='100vh'>
         <CloseButton
           position="absolute"
           right={0}
@@ -38,7 +38,7 @@ const TermsAndConditions = () => {
             Qaydalar və Şərtlər
           </Text>
         </Center>
-        <Flex flexDirection="column" gap="15px">
+        <Flex flexDirection="column" gap="15px" overflowY="scroll" w='100%' maxH='50vh'>
           <Text>
             Siz, “ABB” ASC internet bank xidməti vasitəsilə təqdim edilən onlayn
             qeydiyyatdan keçmə və bank hesabının açılması xidmətindən (Xidmət)
