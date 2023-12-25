@@ -45,6 +45,9 @@ function Page() {
   const rejectHandler = () => {
     router.push("/");
   };
+  const acceptHandler = () => {
+    router.push("/az/application")
+  }
   return (
     <div className={pageCss.containerWrapper}>
       <CloseButton
@@ -148,6 +151,7 @@ function Page() {
             backgroundColor="#2058BB"
             opacity={selectedOrganization ? "1" : ".3"}
             disabled={!selectedOrganization}
+            onClick={acceptHandler}
           >
             Davam et
           </Button>
