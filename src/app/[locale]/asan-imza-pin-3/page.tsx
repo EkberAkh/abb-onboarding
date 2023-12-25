@@ -1,11 +1,14 @@
 'use client'
 import { Box,  Container, Heading, Text, Image, CloseButton, Stack, Alert, AlertIcon, VStack } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const AsanImzaPinThree = () => {
   const router = useRouter();
+  
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
   const clickHandler = () => {
-    router.push("/");
+    router.push(`/${pathNameFirst}/login`);
   }
   return (
     <Stack height='100%' width='100%' padding="24px">
@@ -15,7 +18,7 @@ const AsanImzaPinThree = () => {
         Hörmətli müştəri, müştəri məlumatlarınız üzrə düzəliş gərəklidir. Məsələ ilə bağlı ABB-yə məxsus filial və ya şöbəyə müraciət etməyiniz xahiş olunur.
       </Alert>
       </VStack>
-      <CloseButton alignSelf='flex-end' onClick={clickHandler}  background='#EDF2F7'  _hover={{ backgroundColor: 'gray.200'}} />
+      <CloseButton alignSelf='flex-end' onClick={clickHandler}    _hover={{ backgroundColor: 'gray.200'}} />
       <Container as='div' display='flex' justifyContent='center' flexDirection='column'  gap='16px' maxW='500px' px='24px'>
           <VStack ><Image src='../images/logo-customer.svg' alt='logo'/></VStack>
           <Heading textAlign='center' color="#000" fontSize='24px' fontWeight='600' lineHeight='30px'>Sorğunuz icradadır</Heading>

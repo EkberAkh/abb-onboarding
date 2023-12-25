@@ -11,13 +11,15 @@ import {
   Stack,
   VStack,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AsanImzaPinTwo = () => {
   const [progressValue, setProgressValue] = useState(0);
   const router = useRouter();
 
+  const pathName = usePathname();
+  let pathNameFirst = pathName.split("/")[1]
   useEffect(() => {
     const timer = setInterval(() => {
       setProgressValue((prevValue) => Math.min(prevValue + 100 / 1000, 100));
@@ -29,7 +31,7 @@ const AsanImzaPinTwo = () => {
   }, []);
 
   const clickHandler = () => {
-    router.push("/");
+    router.push(`/${pathNameFirst}/login`);
   };
 
   return (
@@ -40,7 +42,6 @@ const AsanImzaPinTwo = () => {
         position="absolute"
         right="24px"
         top="24px"
-        background="#EDF2F7"
         _hover={{ backgroundColor: "gray.200" }}
       />
       <Container

@@ -24,7 +24,6 @@ export default function Home() {
        <CloseButton
         alignSelf="flex-end"
         position="fixed"
-        background="#EDF2F7"
         _hover={{ backgroundColor: "gray.200" }}
       />
       <VStack

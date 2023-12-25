@@ -12,7 +12,7 @@ import {
   CloseButton,
   VStack,
 } from "@chakra-ui/react";
-import { useRouter,useSearchParams } from "next/navigation";
+import { usePathname, useRouter,useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AsanImzaPinOne = () => {
@@ -21,6 +21,8 @@ const AsanImzaPinOne = () => {
 const searchParams = useSearchParams()
 const fetcher = (url: string): Promise<any> => fetch(url).then(res => res.json());
 
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
 const { data, error } = useSWR(
   'https://mock-api-login-abb.vercel.app/onboarding-ms/v1/auth/status/2a5a628a-d72b-4ba4-8157-8dc11c130093', 
   fetcher, 
@@ -30,11 +32,11 @@ const { data, error } = useSWR(
 console.log(data);
 
   const clickHandler = () => {
-    router.push("/");
+    router.push(`/${pathNameFirst}/login`);
   };
   useEffect(() => {
     if (data) {
-      router.push('/az/select-organization');
+      router.push(`/${pathNameFirst}/select-organization`);
     } else {
       setProgressValue(oldValue => Math.min(oldValue + 10, 100));
     }
@@ -54,7 +56,6 @@ console.log(data);
         position="absolute"
         right="24px"
         top="24px"
-        background="#EDF2F7"
         _hover={{ backgroundColor: "gray.200" }}
       />
       <Container
