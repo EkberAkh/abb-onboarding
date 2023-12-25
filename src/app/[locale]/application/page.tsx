@@ -9,28 +9,31 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Erize() {
   const router = useRouter();
+
+  const pathName = usePathname();
+  let pathNameFirst = pathName.split("/")[1];
   const rejectHandler = () => {
-    router.back();
+    router.push(`/${pathNameFirst}/select-organization`);
   };
   const signHandler = () => {
-    router.push("/az/asan-imza-pin-2")
-  }
+    router.push(`/${pathNameFirst}/asan-imza-pin-2`);
+  };
 
   return (
     <>
-      <Flex flexDirection="column" justifyContent="center" alignItems="center" >
-      <CloseButton
-        position="fixed"
-        right={0}
-        top={0}
-        m="20px"
-        onClick={rejectHandler}
-        _hover={{ backgroundColor: "gray.200" }}
-      />
+      <Flex flexDirection="column" justifyContent="center" alignItems="center">
+        <CloseButton
+          position="fixed"
+          right={0}
+          top={0}
+          m="20px"
+          onClick={rejectHandler}
+          _hover={{ backgroundColor: "gray.200" }}
+        />
 
         <Image
           textAlign="center"
@@ -79,7 +82,9 @@ export default function Erize() {
             <Button colorScheme="gray" onClick={rejectHandler}>
               İmtina et
             </Button>
-            <Button colorScheme="blue" onClick={signHandler}>İmzala </Button>
+            <Button colorScheme="blue" onClick={signHandler}>
+              İmzala{" "}
+            </Button>
           </Flex>
         </Container>
       </Flex>
