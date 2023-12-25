@@ -11,6 +11,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const TermsAndConditions = () => {
   const router = useRouter();
@@ -122,8 +123,8 @@ const TermsAndConditions = () => {
           <Text fontWeight="bold">4. Əlaqə məlumatları</Text>
           <Text>
             Xidmətə dair hər hansı bir sualınız yaranarsa, bizimlə
-            customer.service@ibar.az e-mail ünvanı və ya +994 12 493 00 91
-            (1711), +994 51 226 44 47 telefon nömrələri vasitəsilə əlaqə saxlaya
+            customer <Link href={'/'} style={{ color: "rgb(32, 88, 187)" }}>service@ibar.az</Link> e-mail ünvanı və ya <Link style={{ color: "rgb(32, 88, 187)" }} href={'/'}>+994 12 493 00 91 (1711)</Link>
+            , <Link style={{ color: "rgb(32, 88, 187)" }} href={'/'}>+994 51 226 44 47</Link> telefon nömrələri vasitəsilə əlaqə saxlaya
             bilərsiniz.
           </Text>
         </Flex>
