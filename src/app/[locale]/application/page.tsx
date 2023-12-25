@@ -16,17 +16,28 @@ export default function Erize() {
   const rejectHandler = () => {
     router.back();
   };
-  
+  const signHandler = () => {
+    router.push("/az/asan-imza-pin-2")
+  }
+
   return (
     <>
-      <Flex flexDirection="column" justifyContent="center" alignItems="center">
-        <CloseButton position="absolute" right={0} top={0} size="lg" m="30px" />
+      <Flex flexDirection="column" justifyContent="center" alignItems="center" >
+      <CloseButton
+        position="fixed"
+        right={0}
+        top={0}
+        m="20px"
+        onClick={rejectHandler}
+        _hover={{ backgroundColor: "gray.200" }}
+      />
 
         <Image
           textAlign="center"
           src="../images/Loading.png"
           alt="logo"
           mb="30px"
+          mt="20px"
         />
         <Text fontWeight="bold" fontSize="30px">
           {" "}
@@ -68,7 +79,7 @@ export default function Erize() {
             <Button colorScheme="gray" onClick={rejectHandler}>
               İmtina et
             </Button>
-            <Button colorScheme="blue">İmzala </Button>
+            <Button colorScheme="blue" onClick={signHandler}>İmzala </Button>
           </Flex>
         </Container>
       </Flex>

@@ -24,7 +24,6 @@ const TermsAndConditions = () => {
           position="absolute"
           right={0}
           top={0}
-          size="lg"
           m="30px"
           onClick={handleClose}
           _hover={{ backgroundColor: "gray.200" }}
