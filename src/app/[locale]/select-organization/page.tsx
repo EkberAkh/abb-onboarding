@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { Button, Select, Stack, Alert, AlertIcon } from "@chakra-ui/react";
+import { Button, Select, Stack, Alert, AlertIcon, CloseButton } from "@chakra-ui/react";
 import pageCss from "./pageCss.module.css";
 import { useRouter } from "next/navigation";
 interface Organization {
@@ -29,6 +29,14 @@ router.push('/')
 }
   return (
     <div className={pageCss.containerWrapper}>
+      <CloseButton 
+      position="absolute"
+      right={0}
+      top={0}
+      size="lg"
+      m="30px"
+      onClick={rejectHandler}
+      _hover={{ backgroundColor: "gray.200" }}/>
       {alert && (
         <Stack spacing={3}>
           <Alert maxWidth="504px" status="error">
@@ -40,7 +48,7 @@ router.push('/')
       <div className={pageCss.container}>
         <h1 className={pageCss.title}>Təşkilatı seçin</h1>
         <p className={pageCss.subTitle}>
-          Qeydiyyatdan keçirmək istədiyiniz şirkəti seçməniz xahiş olunur
+        Daxil olmaq istədiyiniz şirkəti seçməyiniz xahiş olunur
         </p>
 
         <div className={pageCss.selectContainer}>
@@ -48,8 +56,8 @@ router.push('/')
             <Select
               size="md"
               value={selectedOrganization}
-              onChange={(e) => setSelectedOrganization(e.target.value)}
-            >
+              onChange={(e) => setSelectedOrganization(e.target.value)} 
+            >         
               {organizations.map(org => (
                 <option key={org.organizationCode} value={org.organizationCode}>
                   {org.organizationName} ({org.organizationCode})
@@ -75,7 +83,7 @@ router.push('/')
             border="2px"
             borderColor="transparent"
             backgroundColor="#EDF2F7"
-            color="#1A202C"
+            color="black"
             opacity=".8"
             _hover={{ opacity: 1 }}
             onClick={rejectHandler}

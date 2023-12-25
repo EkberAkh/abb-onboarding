@@ -13,9 +13,9 @@ const SignFooter = () => {
         }
       };
     return (
-        <HStack p='24px 32px' gap='35px' alignItems='center'>
+        <HStack p='24px 0' alignItems='center' justifyContent="center" gap="150px">
             <Image src="./images/Frame 7508.png"></Image>
-            <Link href={getUrl()} target="_blank" _hover={{ color: 'blue' }}>ASAN İmza necə alınmalı?</Link>
+            <Link fontSize="sm" href={getUrl()} target="_blank" color="gray.500" cursor="pointer" _hover={{ color: 'blue' }}>ASAN İmza necə alınmalı?</Link>
       </HStack>
     )
 }

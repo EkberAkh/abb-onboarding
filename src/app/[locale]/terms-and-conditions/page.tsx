@@ -27,6 +27,7 @@ const TermsAndConditions = () => {
           size="lg"
           m="30px"
           onClick={handleClose}
+          _hover={{ backgroundColor: "gray.200" }}
         />
 
         <Center>
@@ -128,10 +129,10 @@ const TermsAndConditions = () => {
         </Flex>
         <Flex mt="70px" gap="20px">
           <Spacer />
-          <Button colorScheme="gray">İmtina et</Button>
+          <Button colorScheme="gray" onClick={handleClose}>İmtina et</Button>
           <Button
             onClick={() => {
-              router.push("asan-imza-pin-1");
+              router.push("/");
             }}
             colorScheme="blue"
           >

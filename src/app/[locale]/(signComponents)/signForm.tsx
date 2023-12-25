@@ -231,7 +231,7 @@ const SignForm = () => {
         >
           {" "}
           Mən{" "}
-          <Link href={"az/terms-and-conditions"}>qaydalar və şərtlərlə </Link>
+          <Link href={"az/terms-and-conditions"} color="rgb(32, 88, 187)" textDecoration="underline">qaydalar və şərtlərlə </Link>
           razıyam
         </Checkbox>
         <Box w="100%">
