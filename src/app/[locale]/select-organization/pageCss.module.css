@@ -36,10 +36,11 @@
   }
   .title {
     color: #1a202c;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
     line-height: 36px;
     margin-bottom: 8px;
+    text-align: center;
   }
   .subTitle {
     color: #4a5568;
@@ -47,4 +48,5 @@
     font-weight: 500;
     line-height: 20px;
     margin-bottom: 16px;
+    text-align: center;
   }

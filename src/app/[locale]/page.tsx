@@ -16,17 +16,18 @@ import {
 import Link from "next/link";
 import SignForm from "./(signComponents)/signForm";
 import SignFooter from "./(signComponents)/signFooter";
+import { Fira_Code } from "next/font/google";
 
 export default function Home() {
   return (
     <VStack padding="24px" width="100%" justifyContent="space-between">
        <CloseButton
         alignSelf="flex-end"
-       
-        background="#EDF2F7"
+        position="fixed"
         _hover={{ backgroundColor: "gray.200" }}
       />
       <VStack
+        margin="60px"
         minWidth="465px"
         gap="14px"
         padding="12px"
@@ -47,7 +48,9 @@ export default function Home() {
         </VStack>
         <SignForm />
       </VStack>
+      <Box position="fixed" bottom="0" width="100%">
       <SignFooter />
+      </Box>
     </VStack>
   );
 }

@@ -40,7 +40,6 @@ const AsanImzaPinTwo = () => {
         position="absolute"
         right="24px"
         top="24px"
-        background="#EDF2F7"
         _hover={{ backgroundColor: "gray.200" }}
       />
       <Container
