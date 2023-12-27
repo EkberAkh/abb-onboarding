@@ -110,6 +110,11 @@ let pathNameFirst = pathName.split("/")[1]
       const responseData = await response.json();
       console.log(responseData);
       const verificationCode = responseData.verificationCode
+      const phoneNum = responseData.phoneNumber
+      const asanId = responseData.asanId
+      localStorage.setItem("asanId",asanId)
+      localStorage.setItem("phoneNum",phoneNum)
+     
       const url = `/${pathNameFirst}/asan-imza-pin-1?verificationCode=${encodeURIComponent(verificationCode)}`;
       router.push(url);
     } catch (error) {
