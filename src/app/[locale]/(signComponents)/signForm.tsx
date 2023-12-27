@@ -22,7 +22,7 @@ import {
 import { Controller, Form, useForm } from "react-hook-form";
 import { useCallback, useEffect, useRef, useState } from "react";
 import IMask from "imask";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 const SignForm = () => {
@@ -79,7 +79,8 @@ const SignForm = () => {
     console.log(getValues("phoneNumber"));
     console.log(getValues("password"));
   };
-
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
   const router = useRouter();
   const [isErr, setIsErr] = useState(false);
   const buttonClick = async () => {
@@ -113,7 +114,8 @@ const SignForm = () => {
       const asanId = responseData.asanId
       localStorage.setItem("asanId",asanId)
       localStorage.setItem("phoneNum",phoneNum)
-      const url = `/az/asan-imza-pin-1?verificationCode=${encodeURIComponent(verificationCode)}`;
+     
+      const url = `/${pathNameFirst}/asan-imza-pin-1?verificationCode=${encodeURIComponent(verificationCode)}`;
       router.push(url);
     } catch (error) {
       console.error("Error making the request:", error);
@@ -235,7 +237,7 @@ const SignForm = () => {
         >
           {" "}
           Mən{" "}
-          <Link href={"az/terms-and-conditions"} color="rgb(32, 88, 187)" textDecoration="underline">qaydalar və şərtlərlə </Link>
+          <Link href={`${pathNameFirst}/terms-and-conditions`} color="rgb(32, 88, 187)" textDecoration="underline">qaydalar və şərtlərlə </Link>
           razıyam
         </Checkbox>
         <Box w="100%">

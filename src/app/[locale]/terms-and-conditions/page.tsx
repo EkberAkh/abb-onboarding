@@ -1,25 +1,27 @@
 "use client";
 
 import {
-  Container,
   Text,
   Flex,
   Spacer,
   CloseButton,
-  Center,
   Image,
   Button,
+  VStack,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 const TermsAndConditions = () => {
   const router = useRouter();
   const handleClose = () => {
-    router.back();
+    router.push(`/${pathNameFirst}`);
   };
+  
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
   return (
     <>
-      <Container pt="5%" pb="5%" w='100%' maxW='100vh'>
         <CloseButton
           position="absolute"
           right={0}
@@ -28,15 +30,11 @@ const TermsAndConditions = () => {
           onClick={handleClose}
           _hover={{ backgroundColor: "gray.200" }}
         />
-
-        <Center>
+      <VStack p='116px 165px' w='100%' m='0' alignItems='center'>
           <Image textAlign="center" src="../images/Loading.png" alt="logo" />
-        </Center>
-        <Center>
           <Text fontWeight="bold" fontSize="30px" m="30px">
             Qaydalar və Şərtlər
           </Text>
-        </Center>
         <Flex flexDirection="column" gap="15px" overflowY="scroll" w='100%' maxH='50vh'>
           <Text>
             Siz, “ABB” ASC internet bank xidməti vasitəsilə təqdim edilən onlayn
@@ -121,24 +119,24 @@ const TermsAndConditions = () => {
           <Text fontWeight="bold">4. Əlaqə məlumatları</Text>
           <Text>
             Xidmətə dair hər hansı bir sualınız yaranarsa, bizimlə
-            customer.service@ibar.az e-mail ünvanı və ya +994 12 493 00 91
-            (1711), +994 51 226 44 47 telefon nömrələri vasitəsilə əlaqə saxlaya
+            customer <Link href={`/${pathNameFirst}`} style={{ color: "rgb(32, 88, 187)" }}>service@ibar.az</Link> e-mail ünvanı və ya <Link style={{ color: "rgb(32, 88, 187)" }} href={`/${pathNameFirst}`}>+994 12 493 00 91 (1711)</Link>
+            , <Link style={{ color: "rgb(32, 88, 187)" }} href={`/${pathNameFirst}`}>+994 51 226 44 47</Link> telefon nömrələri vasitəsilə əlaqə saxlaya
             bilərsiniz.
           </Text>
         </Flex>
-        <Flex mt="70px" gap="20px">
+        <Flex mt="70px" gap="20px" position='fixed' bottom='20px' right='165px'>
           <Spacer />
-          <Button colorScheme="gray" onClick={handleClose}>İmtina et</Button>
+          <Button colorScheme="blue" onClick={handleClose}>İmtina et</Button>
           <Button
             onClick={() => {
-              router.push("/");
+              router.push(`/${pathNameFirst}`);
             }}
-            colorScheme="blue"
+            colorScheme='gray'
           >
-            Təsdiq edirəm
+            Təsdiq et
           </Button>
         </Flex>
-      </Container>
+      </VStack>
     </>
   );
 };

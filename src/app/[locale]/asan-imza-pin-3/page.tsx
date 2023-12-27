@@ -1,11 +1,14 @@
 'use client'
 import { Box,  Container, Heading, Text, Image, CloseButton, Stack, Alert, AlertIcon, VStack } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const AsanImzaPinThree = () => {
   const router = useRouter();
+  
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
   const clickHandler = () => {
-    router.push("/");
+    router.push(`/${pathNameFirst}/login`);
   }
   return (
     <Stack height='100%' width='100%' padding="24px">

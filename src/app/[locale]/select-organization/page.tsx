@@ -15,7 +15,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import pageCss from "./pageCss.module.css";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 interface Organization {
   organizationName: string;
   organizationCode: string;
@@ -27,6 +27,8 @@ function Page() {
   const [alert, setAlert] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const pathName = usePathname();
+  let pathNameFirst = pathName.split("/")[1]
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -43,10 +45,10 @@ function Page() {
   }, []);
   const router = useRouter();
   const rejectHandler = () => {
-    router.push("/");
+    router.push(`/${pathNameFirst}`);
   };
   const acceptHandler = () => {
-    router.push("/az/application")
+    router.push(`/${pathNameFirst}/application`)
   }
   return (
     <div className={pageCss.containerWrapper}>

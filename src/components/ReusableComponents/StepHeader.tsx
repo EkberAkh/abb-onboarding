@@ -1,7 +1,12 @@
 import { Button, Flex, HStack, Image, Text, Select} from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 export function StepHeader() {
   const  t = useTranslations();
+  const router = useRouter();
+  const clickHandler = () => {
+    router.push("/");
+  }
   
     return(
         <HStack bg="#fff" px="32px" height="64px" alignItems="center">
@@ -47,6 +52,7 @@ export function StepHeader() {
             textColor="#fff"
             borderRadius="6px"
             _hover={{ bg: "blue" }}
+            onClick={clickHandler}
           >
             {t('common.actions.logout')}
           </Button>
