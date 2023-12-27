@@ -18,9 +18,11 @@ import SignForm from "./(signComponents)/signForm";
 import SignFooter from "./(signComponents)/signFooter";
 import { Fira_Code } from "next/font/google";
 import { usePathname,useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 
 export default function Home() {
+  const t = useTranslations();
   const router = useRouter();
   const pathName = usePathname();
   const backToLogin = () => {
@@ -39,7 +41,7 @@ export default function Home() {
         minWidth="465px"
         gap="14px"
         padding="12px"
-        pt="100px"
+        pt="80px"
         alignItems="flex-start"
         justifyContent="center"
       >
@@ -49,10 +51,10 @@ export default function Home() {
 
         <VStack alignItems="flex-start" gap="8px">
           <Text fontSize="30px" color="gray.800" fontWeight="600">
-            Asan Imza
+            {t("onboarding.asanImza")}
           </Text>
           <Text color="gray.600" fontSize="14px">
-            Qeydiyyatdan keçmək üçün Asan İmza ilə daxil olun.
+          {t("onboarding.terms.heading")}
           </Text>
         </VStack>
         <SignForm />

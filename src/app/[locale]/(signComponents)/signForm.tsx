@@ -26,6 +26,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 const SignForm = () => {
+  const t = useTranslations();
   const [isChecked, setIsChecked] = useState(false);
   const [isInputValid, setIsInputValid] = useState(false);
   const phoneNumberId = "phone-number-input";
@@ -120,7 +121,6 @@ let pathNameFirst = pathName.split("/")[1]
     }
   };
 
-  const t = useTranslations();
 
   return (
     <VStack gap="24px" w="100%">
@@ -139,7 +139,7 @@ let pathNameFirst = pathName.split("/")[1]
       )}
       <form style={{ width: "100%" }} onSubmit={handleSubmit(submitFunc)}>
         <FormControl gap="8px" mb="24px" isInvalid={!!errors?.phoneNumber}>
-          <FormLabel>ASAN İmza Mobil nömrə</FormLabel>
+          <FormLabel>{t("onboarding.phoneNumber")}</FormLabel>
           <InputGroup w="100%">
             <InputLeftAddon color="gray.700" bg="gray.100">
               +994
@@ -188,7 +188,7 @@ let pathNameFirst = pathName.split("/")[1]
           </FormErrorMessage>
         </FormControl>
         <FormControl mb="24px" gap="8px">
-          <FormLabel>ASAN İmza İstifadəçi ID-si</FormLabel>
+          <FormLabel>{t("onboarding.asanID")}</FormLabel>
           <Controller
             name="password"
             control={control}
@@ -225,7 +225,7 @@ let pathNameFirst = pathName.split("/")[1]
             </Text>
           )}
         </FormControl>
-        <Checkbox
+       <Checkbox
           mb="20px"
           isChecked={isChecked}
           onChange={handleCheckboxChange}
@@ -234,7 +234,14 @@ let pathNameFirst = pathName.split("/")[1]
           Mən{" "}
           <Link href={`${pathNameFirst}/terms-and-conditions`} color="rgb(32, 88, 187)" textDecoration="underline">qaydalar və şərtlərlə </Link>
           razıyam
-        </Checkbox>
+          </Checkbox>
+       {/* <Checkbox
+          mb="20px"
+          isChecked={isChecked}
+          onChange={handleCheckboxChange}
+        >
+          {t("onboarding.terms.agree_checkbox")}
+        </Checkbox>*/}
         <Box w="100%">
           <Button
             onClick={buttonClick}
@@ -246,7 +253,7 @@ let pathNameFirst = pathName.split("/")[1]
             isDisabled={!isChecked || !isInputValid}
             fontSize="16px"
           >
-            {isLoading ? <Spinner/> : "Daxil ol"}
+            {isLoading ? <Spinner/> : t("common.actions.login")}
           </Button>
         </Box>
       </form>

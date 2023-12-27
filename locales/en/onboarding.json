@@ -129,6 +129,7 @@
     "3004": "System error. Please try again later.",
     "UNKNOWN": "System error. Please try again later.",
     "AUTH_CERT_IS_NOT_VALID_ERROR": "Authentication certificate is not valid.",
+    "IRRELEVANT_CUSTOMER":"Dear customer, your customer information needs to be corrected. Please contact an ABB branch or department regarding the issue.",
     "INTERNAL_ERROR": "Internal error.",
     "DATA_NOT_EXIST":"It is not possible to obtain your ID card information on the system. Please contact the relevant institution regarding the mentioned issue.",
     "INVALID_PARAMS_ERROR": "Invalid method parameter(s).",

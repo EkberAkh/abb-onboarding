@@ -16,11 +16,13 @@ import {
 } from "@chakra-ui/react";
 import pageCss from "./pageCss.module.css";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 interface Organization {
   organizationName: string;
   organizationCode: string;
 }
 function Page() {
+  const t = useTranslations();
   const [selectedOrganization, setSelectedOrganization] =
     useState<Organization | null>(null);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
@@ -65,14 +67,15 @@ function Page() {
         <Stack spacing={3}>
           <Alert maxWidth="504px" status="error">
             <AlertIcon />
-            There was a problem fetching organization data.
+           {t("onboarding.errors.REGISTERED_EXIST")}
           </Alert>
+          
         </Stack>
       )}
       <div className={pageCss.container}>
-        <h1 className={pageCss.title}>Təşkilatı seçin</h1>
+        <h1 className={pageCss.title}>{t("onboarding.choose_organization")}</h1>
         <p className={pageCss.subTitle}>
-          Daxil olmaq istədiyiniz şirkəti seçməyiniz xahiş olunur
+          {t("onboarding.message_organization")}
         </p>
 
         <div className={pageCss.selectContainer}>
@@ -105,12 +108,12 @@ function Page() {
                 <Text fontWeight={700}>
                   {selectedOrganization
                     ? selectedOrganization.organizationName
-                    : "Təşkilatın adı"}
+                    : t("onboarding.company_name")}
                 </Text>
                 <Text>
                   {selectedOrganization
                     ? selectedOrganization.organizationCode
-                    : "Təşkilatın VÖEN-i"}
+                    : t("onboarding.company_voen")}
                 </Text>
               </VStack>
               <ChevronDownIcon />
@@ -128,6 +131,7 @@ function Page() {
                 marginTop="2"
                 marginBottom="2"
                 backgroundColor="white"
+                _hover={{bg:"rgb(32, 88, 187)", color:"white"}}
               >
                 {organizations.map((org) => (
                   <VStack
@@ -150,14 +154,16 @@ function Page() {
 
         <div className={pageCss.buttonContainer}>
           <Button
-            backgroundColor="#2058BB"
+            colorScheme="brand"
+            variant="solid"
             opacity={selectedOrganization ? "1" : ".3"}
             isDisabled={!selectedOrganization ? true : false}
             onClick={acceptHandler}
           >
-            Davam et
-          </Button>
+            {t("common.actions.login")}
 
+          </Button>
+          
           <Button
             size="md"
             height="42px"
@@ -170,7 +176,7 @@ function Page() {
             _hover={{ opacity: 1 }}
             onClick={rejectHandler}
           >
-            İmtina et
+            {t("common.actions.cancel")}
           </Button>
         </div>
       </div>

@@ -10,10 +10,12 @@ import {
   HStack,
   Spinner,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Erize() {
+  const t = useTranslations();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -45,15 +47,11 @@ export default function Erize() {
           mb="30px"
           mt="20px"
         />
-        <Text fontWeight="bold" fontSize="30px">
-          {" "}
-          “ASAN Finans” sistemi vasitəsi ilə məlumatların
+        <Text fontWeight="bold" fontSize="30px" width="50%" textAlign="center">
+         {t("onboarding.agreement")}
         </Text>
-        <Text fontWeight="bold" fontSize="30px">
-          {" "}
-          alınmasına dair Razılıq ərizəsi
-        </Text>
-        <Container maxWidth="1110px" p="30px">
+        
+        <Container maxWidth="80%" p="30px">
           <Flex flexDirection="column" gap="16px">
             <Text fontWeight="bold">Adı, soyadı, ata adı: </Text>
             <Text fontWeight="bold">
@@ -80,13 +78,13 @@ export default function Erize() {
             <Text fontWeight="bold">İmza:</Text>
           </Flex>
 
-          <Flex m="30px" gap="20px">
+          <Flex m="30px" gap="20px" position="fixed" bottom={0} right="10%">
             <Spacer />
             <Button colorScheme="gray" variant="ghost" onClick={rejectHandler}>
-              İmtina et
+              {t("common.actions.cancel")}
             </Button>
             <Button colorScheme="gray" onClick={signHandler}>
-              {loading ? <Spinner size="sm" color="gray.500" /> : "İmzala"}
+              {loading ? <Spinner size="sm" color="gray.500" /> : t("onboarding.sign")}
             </Button>
           </Flex>
         </Container>

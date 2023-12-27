@@ -1,11 +1,13 @@
 import { Button, Flex, HStack, Image, Text, Select} from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 export function StepHeader() {
   const  t = useTranslations();
   const router = useRouter();
-  const clickHandler = () => {
-    router.push("/");
+  const pathName = usePathname();
+  let pathNameFirst = pathName.split("/")[1];
+  const backToLogin = () => {
+    router.push(`/${pathNameFirst}`);
   }
   
     return(
@@ -52,7 +54,7 @@ export function StepHeader() {
             textColor="#fff"
             borderRadius="6px"
             _hover={{ bg: "blue" }}
-            onClick={clickHandler}
+            onClick={backToLogin}
           >
             {t('common.actions.logout')}
           </Button>

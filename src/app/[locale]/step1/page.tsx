@@ -2,7 +2,7 @@
 import { StepHeader } from "@/components/ReusableComponents/StepHeader";
 import { Alert, AlertIcon, Box, Button, Flex, HStack, Image, Stack, Step, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, Text, VStack, useSteps,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { CustomStepper } from "@/components/ReusableComponents/CustomStepper";
@@ -12,6 +12,8 @@ const Step1 = () => {
   const [lastname,setLastname] = useState('')
   const [voen,setVoen] = useState('')
 const phoneNum = localStorage.getItem('phoneNum');
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1];
   useEffect(() => {
     fetch("https://mock-api-login-abb.vercel.app/onboarding-ms/v1/certificates")
       .then((response) => response.json())
@@ -141,7 +143,7 @@ const router = useRouter()
               data-test-id="nextStep"
               colorScheme="brand"
               onClick={()=>{
-                router.push('step2')
+                router.push(`/${pathNameFirst}/step2`)
               }}
             >
               {t('common.actions.submit')}
