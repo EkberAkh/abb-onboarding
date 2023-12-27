@@ -30,8 +30,8 @@ const AsanImzaPinTwo = () => {
     };
   }, []);
 
-  const clickHandler = () => {
-    router.push(`/${pathNameFirst}`);
+  const backToLogin = () => {
+    router.push(`/${pathNameFirst}/login`);
   };
   const rejectHandler = () => {
     router.push(`/${pathNameFirst}`)
@@ -40,7 +40,7 @@ const AsanImzaPinTwo = () => {
     <Stack position="relative" width="100%">
       <CloseButton
         alignSelf="flex-end"
-        onClick={clickHandler}
+        onClick={backToLogin}
         position="absolute"
         right="24px"
         top="24px"
