@@ -3,10 +3,11 @@ import { usePathname } from "next/navigation";
 
 const SignFooter = () => {
     const pathName = usePathname();
+    let pathNameFirst = pathName.split("/")[1];
     const getUrl = () => {
-        if (pathName === "/az") {
+        if (pathNameFirst === "az") {
           return "https://asanimza.az/";
-        } else if (pathName === "/en") {
+        } else if (pathNameFirst === "en") {
           return "https://asanimza.az/en/";
         } else {
           return "https://asanimza.az/";

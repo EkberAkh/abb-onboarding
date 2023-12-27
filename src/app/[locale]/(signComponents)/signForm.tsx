@@ -79,8 +79,8 @@ const SignForm = () => {
     console.log(getValues("phoneNumber"));
     console.log(getValues("password"));
   };
-  const pathName = usePathname();
-  let pathNameFirst = pathName.split("/")[1];
+const pathName = usePathname();
+let pathNameFirst = pathName.split("/")[1]
   const router = useRouter();
   const [isErr, setIsErr] = useState(false);
   const buttonClick = async () => {
@@ -109,21 +109,14 @@ const SignForm = () => {
       }
       const responseData = await response.json();
       console.log(responseData);
-      const verificationCode = responseData.verificationCode;
-      const phoneNum = responseData.phoneNumber;
-      const asanId = responseData.asanId;
-      localStorage.setItem("asanId", asanId);
-      localStorage.setItem("phoneNum", phoneNum);
-
-      const url = `/${pathNameFirst}/asan-imza-pin-1?verificationCode=${encodeURIComponent(
-        verificationCode
-      )}`;
+      const verificationCode = responseData.verificationCode
+      const url = `/${pathNameFirst}/asan-imza-pin-1?verificationCode=${encodeURIComponent(verificationCode)}`;
       router.push(url);
     } catch (error) {
       console.error("Error making the request:", error);
       setIsErr(true);
-    } finally {
-      setIsLoading(false);
+    } finally{
+      setIsLoading(false); 
     }
   };
 
@@ -239,13 +232,7 @@ const SignForm = () => {
         >
           {" "}
           Mən{" "}
-          <Link
-            href={`${pathNameFirst}/terms-and-conditions`}
-            color="rgb(32, 88, 187)"
-            textDecoration="underline"
-          >
-            qaydalar və şərtlərlə{" "}
-          </Link>
+          <Link href={`${pathNameFirst}/terms-and-conditions`} color="rgb(32, 88, 187)" textDecoration="underline">qaydalar və şərtlərlə </Link>
           razıyam
         </Checkbox>
         <Box w="100%">
@@ -254,13 +241,12 @@ const SignForm = () => {
             type="submit"
             w="100%"
             p="8px 16px"
-            colorScheme="brand"
-            variant="solid"
+            bg="blue.300"
             color="white"
             isDisabled={!isChecked || !isInputValid}
             fontSize="16px"
           >
-            {isLoading ? <Spinner /> : "Daxil ol"}
+            {isLoading ? <Spinner/> : "Daxil ol"}
           </Button>
         </Box>
       </form>
