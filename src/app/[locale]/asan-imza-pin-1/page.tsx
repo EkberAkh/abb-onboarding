@@ -14,8 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { usePathname, useRouter,useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useTranslations } from 'next-intl';
 
 const AsanImzaPinOne = () => {
+  const t = useTranslations();
   const [progressValue, setProgressValue] = useState(0);
   const router = useRouter();
 const searchParams = useSearchParams()
@@ -81,7 +83,7 @@ console.log(data);
           fontWeight="600"
           lineHeight="30px"
         >
-          ASAN İmza təsdiqi
+          {t("onboarding.asanConfirmation")}
         </Heading>
         <Text
           textAlign="center"
@@ -90,8 +92,7 @@ console.log(data);
           lineHeight="24px"
           color="rgba(0, 0, 0, 0.50)"
         >
-          Telefonunuza daxil olan kodu aşağıdakı kodu ilə eyni olmasını müqayisə
-          edin və ASAN PIN1 ilə təsdiqləyin.
+         {t("onboarding.pin1Check")}
         </Text>
         <Box border="1px solid #E4E4E4" borderRadius="12px">
           <Box as="div" p="24px" textAlign="center">
@@ -102,7 +103,7 @@ console.log(data);
               lineHeight="20px"
               mb="4px"
             >
-              Yoxlama kodu
+               {t("onboarding.verificationCode")}
             </Text>
             <Text
               color="#000"
@@ -122,7 +123,7 @@ console.log(data);
           onClick={rejectHandler}
           _hover={{ backgroundColor: "gray.100" }}
         >
-          İmtina et
+          {t("common.actions.cancel")}
         </Button>
       </Container>
     </Stack>

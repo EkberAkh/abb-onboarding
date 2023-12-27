@@ -11,8 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const TermsAndConditions = () => {
+  const t = useTranslations();
   const router = useRouter();
   const handleClose = () => {
     router.push(`/${pathNameFirst}`);
@@ -43,10 +45,11 @@ const getUrl = () => {
         <VStack alignItems="center">
           <Image  src="../images/Loading.png" alt="logo" />
           <Text fontWeight="bold" fontSize="30px" m="30px">
-            Qaydalar və Şərtlər
+            {t("onboarding.terms.popup.title")}
           </Text>
           </VStack>
-        <Flex flexDirection="column" gap="15px" overflowY="scroll" w='95%' maxH='53vh'>
+     <Flex flexDirection="column" gap="15px" overflowY="scroll" w='95%' maxH='53vh'>
+    {/*<Text>{t("onboarding.terms.popup.text_1.0")}</Text>*/}
           <Text>
             Siz, “ABB” ASC internet bank xidməti vasitəsilə təqdim edilən onlayn
             qeydiyyatdan keçmə və bank hesabının açılması xidmətindən (Xidmət)
@@ -134,17 +137,18 @@ const getUrl = () => {
             , <Link style={{ color: "rgb(32, 88, 187)" }} href={`/${pathNameFirst}`}>+994 51 226 44 47</Link> telefon nömrələri vasitəsilə əlaqə saxlaya
             bilərsiniz.
           </Text>
+
         </Flex>
         <Flex mt="30px" gap="20px" position='fixed' bottom='15px' right='220px' backgroundColor="white" width="100%">
           <Spacer />
-          <Button colorScheme='gray' variant='ghost' onClick={handleClose}>İmtina et</Button>
+          <Button colorScheme='gray' variant='ghost' onClick={handleClose}>{t("common.actions.cancel")}</Button>
           <Button
             onClick={() => {
               router.back();
             }}
             colorScheme='gray'
           >
-            Təsdiq et
+            {t("common.actions.approve")}
           </Button>
         </Flex>
       </VStack>

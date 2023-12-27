@@ -32,7 +32,7 @@ import {
 } from "@chakra-ui/react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { StepHeader } from "@/components/ReusableComponents/StepHeader";
 import { CustomStepper } from "@/components/ReusableComponents/CustomStepper";
 import { useTranslations } from "next-intl";
@@ -63,6 +63,8 @@ const Step3 = () => {
   const t = useTranslations();
   const [phone, setPhone] = useState("");
   const router = useRouter();
+  const pathName = usePathname();
+  let pathNameFirst = pathName.split("/")[1];
   const methods = useForm({
     mode: "all",
     defaultValues: {},
@@ -249,7 +251,7 @@ const Step3 = () => {
                 color="#000"
                 _hover={{ bg: "gray.200" }}
                 onClick={() => {
-                  router.back();
+                  router.push(`/${pathNameFirst}/step2`);
                 }}
               >
                 {t("common.actions.back")}

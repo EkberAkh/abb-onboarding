@@ -14,7 +14,7 @@ import {
   useSteps,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
@@ -31,6 +31,9 @@ const Step2 = () => {
   
   const t = useTranslations();
   const router = useRouter();
+  const pathName = usePathname();
+  let pathNameFirst = pathName.split("/")[1];
+
   const methods = useForm({
     mode: "all",
     defaultValues: {
@@ -176,7 +179,7 @@ const Step2 = () => {
                 color="#000"
                 _hover={{ bg: "gray.200" }}
                 onClick={() => {
-                  router.back();
+                  router.push(`/${pathNameFirst}/step1`);
                 }}
               >
                 {t("common.actions.back")}
@@ -184,7 +187,7 @@ const Step2 = () => {
               <Button
                 isDisabled={!isValid}
                 onClick={() => {
-                  router.push("step3");
+                  router.push(`/${pathNameFirst}/step3`);
                 }}
                 bg="#2058BB"
                 color="#fff"
