@@ -21,9 +21,9 @@ const TermsAndConditions = () => {
 const pathName = usePathname();
 let pathNameFirst = pathName.split("/")[1];
 const getUrl = () => {
-    if (pathName === "/az") {
+    if (pathNameFirst === "az") {
       return "https://asanimza.az/";
-    } else if (pathName === "/en") {
+    } else if (pathNameFirst === "en") {
       return "https://asanimza.az/en/";
     } else {
       return "https://asanimza.az/";
@@ -140,7 +140,7 @@ const getUrl = () => {
           <Button colorScheme='gray' variant='ghost' onClick={handleClose}>İmtina et</Button>
           <Button
             onClick={() => {
-              router.push(`/${pathNameFirst}`);
+              router.back();
             }}
             colorScheme='gray'
           >

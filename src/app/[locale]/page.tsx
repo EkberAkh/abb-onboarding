@@ -27,7 +27,7 @@ export default function Home() {
     router.push(`${pathName}/login`);
   }
   return (
-    <VStack padding="24px" width="100%" justifyContent="space-between">
+    <VStack  padding="24px" width="100%" justifyContent="space-between">
        <CloseButton
         onClick={backToLogin}
         alignSelf="flex-end"
@@ -39,6 +39,7 @@ export default function Home() {
         minWidth="465px"
         gap="14px"
         padding="12px"
+        pt="100px"
         alignItems="flex-start"
         justifyContent="center"
       >
