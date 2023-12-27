@@ -109,6 +109,10 @@ const SignForm = () => {
       const responseData = await response.json();
       console.log(responseData);
       const verificationCode = responseData.verificationCode
+      const phoneNum = responseData.phoneNumber
+      const asanId = responseData.asanId
+      localStorage.setItem("asanId",asanId)
+      localStorage.setItem("phoneNum",phoneNum)
       const url = `/az/asan-imza-pin-1?verificationCode=${encodeURIComponent(verificationCode)}`;
       router.push(url);
     } catch (error) {

@@ -15,10 +15,20 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
 const Step2 = () => {
+  type FormValues = {
+    branchCode?: string;
+    activitySector?: string;
+    annualTurnover?: string;
+    loanCommitmentAmount?: string;
+    activityAddress?: string;
+    countEmployees?: string;
+    // Add other form fields as needed
+  };
+  
   const t = useTranslations();
   const router = useRouter();
   const methods = useForm({
@@ -39,9 +49,28 @@ const Step2 = () => {
     count: 3,
   });
 
-  const { formState } = methods; 
+  const { formState,watch  } = methods; 
   const { errors, isValid } = formState;
+  const watchedFields = watch() as FormValues;
+  useEffect(() => {
+    // Function to check if all fields are filled
+    const areAllFieldsFilled = () => {
+      const fields = [
+        'branchCode', 'activitySector', 'annualTurnover',
+        'loanCommitmentAmount', 'activityAddress', 'countEmployees'
+      ];
+      return fields.every(field => {
+        const fieldValue = watchedFields[field as keyof FormValues];
+        return fieldValue && fieldValue.length > 0;
+      });
+    };
+    
 
+    if (areAllFieldsFilled()) {
+      // Saving to localStorage
+      localStorage.setItem('formData', JSON.stringify(watchedFields));
+    }
+  }, [watchedFields]);
   return (
     <FormProvider {...methods}>
     <Stack width="100%" minH="100vh" bg="#F3F3F3">

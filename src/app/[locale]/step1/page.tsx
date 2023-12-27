@@ -4,10 +4,28 @@ import { Alert, AlertIcon, Box, Button, Flex, HStack, Image, Stack, Step, StepIc
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CustomStepper } from "@/components/ReusableComponents/CustomStepper";
 
 const Step1 = () => {
+  const [name,setName] = useState('')
+  const [lastname,setLastname] = useState('')
+  const [voen,setVoen] = useState('')
+const phoneNum = localStorage.getItem('phoneNum');
+  useEffect(() => {
+    fetch("https://mock-api-login-abb.vercel.app/onboarding-ms/v1/certificates")
+      .then((response) => response.json())
+      .then((data) => {
+    const customerInfo = data[0]
+    setName(customerInfo.firstname)
+    setLastname(customerInfo.lastname)
+    setVoen(customerInfo.organizationCode)
+     
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
   const  t = useTranslations();
   const { activeStep } = useSteps({
     index: 0,
@@ -80,7 +98,7 @@ const router = useRouter()
                   fontWeight="600"
                   mb="8px"
                 >
-                  Ad Soyad Ata adı
+                 {name} {lastname}
                 </Text>
                 <HStack>
                   <HStack
@@ -97,7 +115,7 @@ const router = useRouter()
                       fontSize={{ base: "xs", md: "14px" }}
                       fontWeight="500"
                     >
-                      +994 51 999 99 99
+                      {phoneNum}
                     </Text>
                   </HStack>
                   <HStack
@@ -110,7 +128,7 @@ const router = useRouter()
                   >
                     <Image alt="check" src="../images/document.svg" />
                     <Text color="#4A5568" fontSize={{ base: "xs", md: "14px" }}>
-                      12345678902
+                      {voen}
                     </Text>
                   </HStack>
                 </HStack>
