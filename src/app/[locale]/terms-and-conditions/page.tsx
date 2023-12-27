@@ -19,23 +19,34 @@ const TermsAndConditions = () => {
   };
   
 const pathName = usePathname();
-let pathNameFirst = pathName.split("/")[1]
+let pathNameFirst = pathName.split("/")[1];
+const getUrl = () => {
+    if (pathName === "/az") {
+      return "https://asanimza.az/";
+    } else if (pathName === "/en") {
+      return "https://asanimza.az/en/";
+    } else {
+      return "https://asanimza.az/";
+    }
+  };
   return (
     <>
         <CloseButton
           position="absolute"
           right={0}
           top={0}
-          m="30px"
+          m="20px"
           onClick={handleClose}
           _hover={{ backgroundColor: "gray.200" }}
         />
-      <VStack p='116px 165px' w='100%' m='0' alignItems='center'>
-          <Image textAlign="center" src="../images/Loading.png" alt="logo" />
+      <VStack p='50px 165px' w='100%' m='0' alignItems='center'>
+        <VStack alignItems="center">
+          <Image  src="../images/Loading.png" alt="logo" />
           <Text fontWeight="bold" fontSize="30px" m="30px">
             Qaydalar və Şərtlər
           </Text>
-        <Flex flexDirection="column" gap="15px" overflowY="scroll" w='100%' maxH='50vh'>
+          </VStack>
+        <Flex flexDirection="column" gap="15px" overflowY="scroll" w='95%' maxH='53vh'>
           <Text>
             Siz, “ABB” ASC internet bank xidməti vasitəsilə təqdim edilən onlayn
             qeydiyyatdan keçmə və bank hesabının açılması xidmətindən (Xidmət)
@@ -48,8 +59,8 @@ let pathNameFirst = pathName.split("/")[1]
           <Text fontWeight="bold">1. Xidmətdən istifadə qaydası</Text>
           <Text>
             Xidmətdən istifadə etmək üçün ilk növbədə ASAN imzaya sahib olmaq
-            lazımdır. Bu barədə ətraflı məlumatı Asan İmza-nı necə əldə etmək
-            olar? linkinə daxil olaraq əldə edə bilərsiniz.
+            lazımdır. Bu barədə ətraflı məlumatı <Link  href={getUrl()} target="_blank"  style={{ color: "rgb(32, 88, 187)", textDecoration:"underline"}}> Asan İmza-nı necə əldə etmək
+            olar?</Link> linkinə daxil olaraq əldə edə bilərsiniz.
           </Text>
           <Text fontWeight="bold">1.1 Müştəri məlumatları</Text>
           <Text>
@@ -124,9 +135,9 @@ let pathNameFirst = pathName.split("/")[1]
             bilərsiniz.
           </Text>
         </Flex>
-        <Flex mt="70px" gap="20px" position='fixed' bottom='20px' right='165px'>
+        <Flex mt="30px" gap="20px" position='fixed' bottom='15px' right='220px' backgroundColor="white" width="100%">
           <Spacer />
-          <Button colorScheme="blue" onClick={handleClose}>İmtina et</Button>
+          <Button colorScheme='gray' variant='ghost' onClick={handleClose}>İmtina et</Button>
           <Button
             onClick={() => {
               router.push(`/${pathNameFirst}`);
