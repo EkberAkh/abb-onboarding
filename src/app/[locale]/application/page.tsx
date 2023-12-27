@@ -8,11 +8,14 @@ import {
   Container,
   Button,
   HStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Erize() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const pathName = usePathname();
   let pathNameFirst = pathName.split("/")[1];
@@ -79,11 +82,11 @@ export default function Erize() {
 
           <Flex m="30px" gap="20px">
             <Spacer />
-            <Button colorScheme="gray" onClick={rejectHandler}>
+            <Button colorScheme="gray" variant="ghost" onClick={rejectHandler}>
               İmtina et
             </Button>
-            <Button colorScheme="blue" onClick={signHandler}>
-              İmzala{" "}
+            <Button colorScheme="gray" onClick={signHandler}>
+              {loading ? <Spinner size="sm" color="gray.500" /> : "İmzala"}
             </Button>
           </Flex>
         </Container>

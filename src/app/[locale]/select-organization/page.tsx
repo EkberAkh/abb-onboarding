@@ -152,7 +152,7 @@ function Page() {
           <Button
             backgroundColor="#2058BB"
             opacity={selectedOrganization ? "1" : ".3"}
-            disabled={!selectedOrganization}
+            isDisabled={!selectedOrganization ? true : false}
             onClick={acceptHandler}
           >
             Davam et

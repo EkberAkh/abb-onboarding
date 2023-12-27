@@ -31,9 +31,12 @@ const { data, error } = useSWR(
 );
 console.log(data);
 
-  const clickHandler = () => {
+  const backToLogin = () => {
     router.push(`/${pathNameFirst}/login`);
   };
+  const rejectHandler = () => {
+    router.push(`/${pathNameFirst}`)
+  }
   useEffect(() => {
     if (data) {
       router.push(`/${pathNameFirst}/select-organization`);
@@ -52,7 +55,7 @@ console.log(data);
     <Stack position="relative" width="100%">
       <CloseButton
         alignSelf="flex-end"
-        onClick={clickHandler}
+        onClick={backToLogin}
         position="absolute"
         right="24px"
         top="24px"
@@ -88,7 +91,7 @@ console.log(data);
           color="rgba(0, 0, 0, 0.50)"
         >
           Telefonunuza daxil olan kodu aşağıdakı kodu ilə eyni olmasını müqayisə
-          edin və ASAN PIN2 ilə təsdiqləyin.
+          edin və ASAN PIN1 ilə təsdiqləyin.
         </Text>
         <Box border="1px solid #E4E4E4" borderRadius="12px">
           <Box as="div" p="24px" textAlign="center">
@@ -116,7 +119,7 @@ console.log(data);
           colorScheme="white"
           color="black"
           w="100%"
-          onClick={clickHandler}
+          onClick={rejectHandler}
           _hover={{ backgroundColor: "gray.100" }}
         >
           İmtina et

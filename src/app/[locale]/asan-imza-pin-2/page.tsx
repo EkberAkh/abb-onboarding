@@ -30,15 +30,17 @@ const AsanImzaPinTwo = () => {
     };
   }, []);
 
-  const clickHandler = () => {
+  const backToLogin = () => {
     router.push(`/${pathNameFirst}/login`);
   };
-
+  const rejectHandler = () => {
+    router.push(`/${pathNameFirst}`)
+  }
   return (
     <Stack position="relative" width="100%">
       <CloseButton
         alignSelf="flex-end"
-        onClick={clickHandler}
+        onClick={backToLogin}
         position="absolute"
         right="24px"
         top="24px"
@@ -102,7 +104,7 @@ const AsanImzaPinTwo = () => {
           colorScheme="white"
           color="black"
           w="100%"
-          onClick={clickHandler}
+          onClick={rejectHandler}
           _hover={{ backgroundColor: "gray.100" }}
         >
           İmtina et

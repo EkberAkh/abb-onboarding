@@ -17,11 +17,19 @@ import Link from "next/link";
 import SignForm from "./(signComponents)/signForm";
 import SignFooter from "./(signComponents)/signFooter";
 import { Fira_Code } from "next/font/google";
+import { usePathname,useRouter } from "next/navigation";
+
 
 export default function Home() {
+  const router = useRouter();
+  const pathName = usePathname();
+  const backToLogin = () => {
+    router.push(`${pathName}/login`);
+  }
   return (
     <VStack padding="24px" width="100%" justifyContent="space-between">
        <CloseButton
+        onClick={backToLogin}
         alignSelf="flex-end"
         position="fixed"
         _hover={{ backgroundColor: "gray.200" }}
