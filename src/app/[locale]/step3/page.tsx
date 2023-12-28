@@ -38,27 +38,19 @@ import { CustomStepper } from "@/components/ReusableComponents/CustomStepper";
 import { useTranslations } from "next-intl";
 import { CustomerPhone } from "@/components/ReusableComponents/CustomerPhone";
 
-
-
 interface PersonalInfo {
   name: string;
-surname:string;
-phoneNumber:string;
-birthDate:string;
-registrationAddress:{
-  city:string,
-  country:string
-};
-
-
+  surname: string;
+  phoneNumber: string;
+  birthDate: string;
+  registrationAddress: {
+    city: string;
+    country: string;
+  };
 }
 
 const Step3 = () => {
-
-  const step3datas =JSON.parse( localStorage.getItem("formData") || "");
-
-
-  
+  const step3datas = JSON.parse(localStorage.getItem("formData") || "");
 
   const t = useTranslations();
   const [phone, setPhone] = useState("");
@@ -77,7 +69,7 @@ const Step3 = () => {
   const { formState } = methods;
   const { errors, isValid } = formState;
 
-  const [personalInfo, setPersonalInfo] = useState<PersonalInfo|null>(null);
+  const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
 
   const fetchPersonalInfo = async () => {
     try {
@@ -87,7 +79,9 @@ const Step3 = () => {
         return;
       }
 
-      const response = await fetch(`https://mock-api-login-abb.vercel.app/user/v1/users/personal-info/${asanId}`);
+      const response = await fetch(
+        `https://mock-api-login-abb.vercel.app/user/v1/users/personal-info/${asanId}`
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -101,43 +95,52 @@ const Step3 = () => {
   useEffect(() => {
     fetchPersonalInfo();
   }, []);
-  console.log(personalInfo);
+ 
   const { register, handleSubmit, watch } = useForm();
-  const email = watch("email");
-  const fin = watch("FIN");
-  const clickHandler = async () => {
-    try {
-      const storedData = JSON.parse(step3datas);
 
+  const clickHandler = async () => {
+    console.log('CLICK HANDLER');
+    
+    try {
+      const email = watch("email");
+      const fin = watch("FIN");
+      const storedData = step3datas
+  
+      
+      console.log(storedData);
+      
       const payload = {
-        ...storedData, 
-        name: personalInfo?.name,
-        surname: personalInfo?.surname,
+        ...storedData,
+        name: personalInfo?.name ,
+        surname:personalInfo?.surname,
+        
         phoneNumber: personalInfo?.phoneNumber,
         birthDate: personalInfo?.birthDate,
         registrationAddress: personalInfo?.registrationAddress,
-        // email: data.email, 
-        // fin: data.FIN,
+        email: email,
+        FIN: fin,
       };
 
-      // Send POST request
-      const response = await fetch('https://mock-api-login-abb.vercel.app/user/v1/users/customer-info', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://mock-api-login-abb.vercel.app/user/v1/users/customer-info",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+console.log(response);
+console.log(payload);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+    router.push('/asan-imza-pin-3')
 
-      // Handle response data
-      const data = await response.json();
-      console.log(data);
 
-      // Redirect or perform other actions on successful submission
+    console.log(response);
 
     } catch (error) {
       console.error("Failed to send data:", error);
@@ -210,26 +213,42 @@ const Step3 = () => {
                   </Box>
                   <Box width="100%">
                     <FormLabel>{t("onboarding.birthday")}</FormLabel>
-                    <Input value={personalInfo?.birthDate} type="text" placeholder="14.03.1976" />
+                    <Input
+                      value={personalInfo?.birthDate}
+                      type="text"
+                      placeholder="14.03.1976"
+                    />
                   </Box>
                   <Box width="100%">
                     <FormLabel>{t("onboarding.phone")}</FormLabel>
-                    <Input type="tel" placeholder="+994505055050" value={personalInfo?.phoneNumber} />
+                    <Input
+                      type="tel"
+                      placeholder="+994505055050"
+                      value={personalInfo?.phoneNumber}
+                    />
                   </Box>
                 </VStack>
                 <VStack width="48%" gap="24px">
                   <Box width="100%">
                     <FormLabel>{t("onboarding.pin")}</FormLabel>
-                    <Input   {...register("FIN", { required: true })} placeholder="51TFE2Q" color="black" />
+                    <Input
+                      {...register("FIN", { required: true })}
+                      placeholder="51TFE2Q"
+                      color="black"
+                    />
                   </Box>
                   <Box width="100%">
                     <FormLabel>{t("onboarding.address")}</FormLabel>
-                    <Input value={`${personalInfo?.registrationAddress.country}, ${personalInfo?.registrationAddress.city}`} placeholder="Azərbaycan, Bakı" color="black" />
+                    <Input
+                      value={`${personalInfo?.registrationAddress.country}, ${personalInfo?.registrationAddress.city}`}
+                      placeholder="Azərbaycan, Bakı"
+                      color="black"
+                    />
                   </Box>
                   <Box width="100%">
                     <FormLabel>{t("onboarding.email")}</FormLabel>
                     <Input
-                     {...register("email", { required: true })}
+                      {...register("email", { required: true })}
                       placeholder={t(
                         "onboarding.company.company_email_placeholder"
                       )}
@@ -273,3 +292,31 @@ const Step3 = () => {
 };
 
 export default Step3;
+
+
+// {
+//   "activityAddress"
+// : 
+// "Yasamal",
+// "activitySector"
+// : 
+// "option1",
+// "annualTurnover"
+// : 
+// "option1",
+// "branchCode"
+// : 
+// "option1",
+// "countEmployees"
+// : 
+// "option1",
+// "loanCommitmentAmount"
+// : 
+// "option1",
+// "fullName":"wdffwd",
+//   "fin":"242dgf4",
+//   "birthDate":"12-12-2021",
+//   "registrationAddress":"USA",
+//   "phoneNumber":"+8842082472",
+//   "email":"john.@gmail.com"
+// }
