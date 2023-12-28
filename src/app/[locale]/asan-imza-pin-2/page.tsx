@@ -14,15 +14,46 @@ import {
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const AsanImzaPinTwo = () => {
   const t = useTranslations();
   const [progressValue, setProgressValue] = useState(0);
   const router = useRouter();
+  const [verificationCode, setVerificationCode] = useState("");
+
+  const fetcher = (url: string): Promise<any> =>
+    fetch(url).then((res) => res.json());
+
+  const { data, error } = useSWR(
+    "https://mock-api-login-abb.vercel.app/onboarding-ms/v1/auth/status/2a5a628a-d72b-4ba4-8157-8dc11c130093",
+    fetcher,
+
+    { header: { "Content-Type": "applicaton/json" }, refreshInterval: 3000 }
+  );
 
   const pathName = usePathname();
-  let pathNameFirst = pathName.split("/")[1]
+  let pathNameFirst = pathName.split("/")[1];
+
+  const getVerificationCode = async () => {
+    const response = await fetch(
+      "https://mock-api-login-abb.vercel.app/user/v1/users/verification"
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  };
   useEffect(() => {
+    getVerificationCode().then((data) => {
+      setVerificationCode(data.code);
+    });
+    if (data) {
+      router.push(`/${pathNameFirst}/step1`);
+    } else {
+      setProgressValue((oldValue) => Math.min(oldValue + 10, 100));
+    }
     const timer = setInterval(() => {
       setProgressValue((prevValue) => Math.min(prevValue + 100 / 1000, 100));
     }, 10);
@@ -30,14 +61,14 @@ const AsanImzaPinTwo = () => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [data]);
 
   const backToLogin = () => {
     router.push(`/${pathNameFirst}/login`);
   };
   const rejectHandler = () => {
-    router.push(`/${pathNameFirst}`)
-  }
+    router.push(`/${pathNameFirst}`);
+  };
   return (
     <Stack position="relative" width="100%">
       <CloseButton
@@ -96,7 +127,7 @@ const AsanImzaPinTwo = () => {
               fontWeight="600"
               lineHeight="32px"
             >
-              2123
+              {verificationCode}
             </Text>
           </Box>
           <Progress value={progressValue} borderRadius="full" />
@@ -108,7 +139,7 @@ const AsanImzaPinTwo = () => {
           onClick={rejectHandler}
           _hover={{ backgroundColor: "gray.100" }}
         >
-         {t("common.actions.cancel")}
+          {t("common.actions.cancel")}
         </Button>
       </Container>
     </Stack>
