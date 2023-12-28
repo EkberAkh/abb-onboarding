@@ -47,10 +47,11 @@ interface PersonalInfo {
   name: string;
 surname:string;
 phoneNumber:string;
+fin: string;
 birthDate:string;
 registrationAddress:{
   city:string,
-  country:string
+  country:string,
 };
 
 
@@ -60,20 +61,16 @@ const Step3 = () => {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const step3datas =JSON.parse( localStorage.getItem("formData") || "");
-
-
-  
+  const step3datas =JSON.parse(localStorage.getItem("formData") || "");
 
   const t = useTranslations();
-  const [phone, setPhone] = useState("");
   const router = useRouter();
   const pathName = usePathname();
   let pathNameFirst = pathName.split("/")[1];
   const methods = useForm({
     mode: "all",
     defaultValues: {
-      email: ""
+      email: "",
     },
   });
 
@@ -108,14 +105,12 @@ const Step3 = () => {
   useEffect(() => {
     fetchPersonalInfo();
   }, []);
-  console.log(personalInfo);
   const { register, handleSubmit, watch } = useForm();
-  const email = watch("email");
-  const fin = watch("FIN");
+  const email = methods.watch("email");
   const clickHandler = async () => {
     try {
       setIsLoading(true)
-      const storedData = JSON.parse(step3datas);
+      const storedData = step3datas;
 
       const payload = {
         ...storedData, 
@@ -124,8 +119,8 @@ const Step3 = () => {
         phoneNumber: personalInfo?.phoneNumber,
         birthDate: personalInfo?.birthDate,
         registrationAddress: personalInfo?.registrationAddress,
-        // email: data.email, 
-        // fin: data.FIN,
+        email: email, 
+        fin: personalInfo?.fin,
       };
 
       // Send POST request
@@ -140,11 +135,9 @@ const Step3 = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      // Handle response data
-      const data = await response.json();
-      console.log(data);
-      // Redirect or perform other actions on successful submission
+  
+      // const data = await response.json();
+      router.push("/az/asan-imza-pin-3");
 
     } catch (error) {
       console.error("Failed to send data:", error);
@@ -229,7 +222,7 @@ const Step3 = () => {
                 <VStack width="48%" gap="24px">
                   <Box width="100%">
                     <FormLabel>{t("onboarding.pin")}</FormLabel>
-                    <Input   {...register("FIN", { required: true })} placeholder="51TFE2Q" color="black" />
+                    <Input disabled color="black" value={personalInfo?.fin} />
                   </Box>
                   <Box width="100%">
                     <FormLabel>{t("onboarding.address")}</FormLabel>

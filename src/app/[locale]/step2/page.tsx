@@ -80,7 +80,6 @@ const Step2 = () => {
       <StepHeader />
       <VStack px="6%" gap="16px" mt="24px">
         <CustomStepper number={activeStep} />
-        
           <Flex
             as="form"
             width="100%"

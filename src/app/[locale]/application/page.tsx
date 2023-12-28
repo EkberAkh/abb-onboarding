@@ -12,12 +12,31 @@ import {
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Erize() {
   const t = useTranslations();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+
+  const applicationRequest = async () => {
+    const response = await fetch('https://mock-api-login-abb.vercel.app/onboarding-ms/v1/certificates');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  }
+
+  useEffect(() => {
+    applicationRequest().then(data => {
+      setName(data[0].firstname);
+      setSurname(data[0].lastname);
+    });
+  }, []);
 
   const pathName = usePathname();
   let pathNameFirst = pathName.split("/")[1];
@@ -53,7 +72,7 @@ export default function Erize() {
         
         <Container maxWidth="80%" p="30px">
           <Flex flexDirection="column" gap="16px">
-            <Text fontWeight="bold">Adı, soyadı, ata adı: </Text>
+            <Text fontWeight="bold">{name} {surname} </Text>
             <Text fontWeight="bold">
               Fərdi sahibkarın FİN nömrəsi / VÖEN nömrəsi:{" "}
             </Text>

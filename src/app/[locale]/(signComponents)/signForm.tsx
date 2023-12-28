@@ -89,6 +89,7 @@ let pathNameFirst = pathName.split("/")[1]
     let phoneNumber = getValues("phoneNumber").split(" ").join("");
     let asanId = getValues("password");
     console.log(phoneNumber);
+    localStorage.setItem("asanId", asanId);
 
     const requestData = {
       phoneNumber: `+994${phoneNumber}`,
