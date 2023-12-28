@@ -148,10 +148,10 @@ let pathNameFirst = pathName.split("/")[1]
               name="phoneNumber"
               control={control}
               rules={{
-                required: "Asan ID qeyd olunmayıb",
+                required: t("onboarding.errorMessages.phoneNumber.required"),
                 validate: (value: string) => {
                   if (value.length !== 12) {
-                    return "Asan ID düzgün deyil";
+                    return t("onboarding.errorMessages.phoneNumber.matches");
                   }
                   return undefined;
                 },
@@ -193,10 +193,10 @@ let pathNameFirst = pathName.split("/")[1]
             name="password"
             control={control}
             rules={{
-              required: "Asan ID qeyd olunmayıb",
+              required: t("onboarding.errorMessages.asanID.required"),
               validate: (value: string) => {
                 if (value.length !== 6) {
-                  return "Asan ID düzgün deyil";
+                  return t("onboarding.errorMessages.asanID.matches");
                 }
               },
             }}
