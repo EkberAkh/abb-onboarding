@@ -29,14 +29,17 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  FormErrorMessage,
+  Spinner,
 } from "@chakra-ui/react";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { Controller, FormProvider, useForm, useFormContext } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { StepHeader } from "@/components/ReusableComponents/StepHeader";
 import { CustomStepper } from "@/components/ReusableComponents/CustomStepper";
 import { useTranslations } from "next-intl";
 import { CustomerPhone } from "@/components/ReusableComponents/CustomerPhone";
+import { error } from "console";
 
 
 
@@ -54,6 +57,8 @@ registrationAddress:{
 }
 
 const Step3 = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const step3datas =JSON.parse( localStorage.getItem("formData") || "");
 
@@ -67,7 +72,9 @@ const Step3 = () => {
   let pathNameFirst = pathName.split("/")[1];
   const methods = useForm({
     mode: "all",
-    defaultValues: {},
+    defaultValues: {
+      email: ""
+    },
   });
 
   const { activeStep } = useSteps({
@@ -107,6 +114,7 @@ const Step3 = () => {
   const fin = watch("FIN");
   const clickHandler = async () => {
     try {
+      setIsLoading(true)
       const storedData = JSON.parse(step3datas);
 
       const payload = {
@@ -136,11 +144,12 @@ const Step3 = () => {
       // Handle response data
       const data = await response.json();
       console.log(data);
-
       // Redirect or perform other actions on successful submission
 
     } catch (error) {
       console.error("Failed to send data:", error);
+    }finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -226,16 +235,32 @@ const Step3 = () => {
                     <FormLabel>{t("onboarding.address")}</FormLabel>
                     <Input value={`${personalInfo?.registrationAddress.country}, ${personalInfo?.registrationAddress.city}`} placeholder="Azərbaycan, Bakı" color="black" />
                   </Box>
-                  <Box width="100%">
+                  <FormControl width="100%" 
+                       isInvalid = {!!errors?.email}>
                     <FormLabel>{t("onboarding.email")}</FormLabel>
-                    <Input
-                     {...register("email", { required: true })}
-                      placeholder={t(
-                        "onboarding.company.company_email_placeholder"
-                      )}
-                      color="black"
+                    <Controller
+                    name ='email'
+                    control={methods.control}
+                    rules={{
+                      required: t("onboarding.errorMessages.email.required"),
+                      
+                    }}
+                    render={({field})=>(
+                      <Input
+                      {...field}
+                       placeholder={t(
+                         "onboarding.company.company_email_placeholder"
+                       )}
+                       color="black"
+                       onChange={(e) => {
+                        field.onChange(e);
+                      }}
+                     />
+                    )}
                     />
-                  </Box>
+                    <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+                   
+                  </FormControl>
                 </VStack>
               </Flex>
             </Flex>
@@ -260,9 +285,9 @@ const Step3 = () => {
                 bg="#2058BB"
                 color="#fff"
                 onClick={clickHandler}
-                isDisabled={!isValid}
+                isDisabled={!isValid || isLoading}
               >
-                {t("common.actions.complete")}
+                {isLoading ? <Spinner/> : t("common.actions.complete")}
               </Button>
             </Flex>
           </Flex>
